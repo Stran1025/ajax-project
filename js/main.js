@@ -8,6 +8,12 @@ var $searchForm = document.querySelector('#search-form');
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
 
+var xhrGen1 = new XMLHttpRequest();
+xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
+xhrGen1.responseType = 'json';
+xhrGen1.addEventListener('load', handleXHR);
+xhrGen1.send();
+
 function dropDownSearch(event) {
   $searchFilter.classList.toggle('hidden');
   $searchBarArrow.classList.toggle('fa-angle-up');
@@ -22,23 +28,40 @@ function handleSearch(event) {
   }
   if ($searchForm.name.value !== '') {
     sendRequest('https://pokeapi.co/api/v2/pokemon/' + $searchForm.name.value.toLowerCase());
+  } else if ($searchForm.type.value !== '') {
+    var xhrType = new XMLHttpRequest();
+    xhrType.open('GET', 'https://pokeapi.co/api/v2/type/' + $searchForm.type.value);
+    xhrType.responseType = 'json';
+    xhrType.addEventListener('load', handleTypeSearch);
+    xhrType.send();
+  } else if ($searchForm.generation.value !== '') {
+    var xhrGeneration = new XMLHttpRequest();
+    xhrGeneration.open('GET', 'https://pokeapi.co/api/v2/' + $searchForm.generation.value);
+    xhrGeneration.responseType = 'json';
+    xhrGeneration.addEventListener('load', handleXHR);
+    xhrGeneration.send();
   }
 }
 
-var xhrGen1 = new XMLHttpRequest();
-xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
-xhrGen1.responseType = 'json';
-xhrGen1.addEventListener('load', handleXHR);
-xhrGen1.send();
+function handleTypeSearch(event) {
+  var returnData = event.target.response;
+  getlinkType(returnData.pokemon);
+}
 
 function handleXHR(event) {
   var returnData = event.target.response;
-  getlink(returnData.pokemon_species);
+  getlinkGeneration(returnData.pokemon_species);
 }
 
-function getlink(array) {
+function getlinkGeneration(array) {
   for (var i = 0; i < array.length; i++) {
     sendRequest('https://pokeapi.co/api/v2/pokemon/' + array[i].name);
+  }
+}
+
+function getlinkType(array) {
+  for (var i = 0; array.length > 1; i++) {
+    sendRequest(array[i].pokemon.url);
   }
 }
 

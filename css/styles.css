@@ -43,13 +43,13 @@
 
 .search-bar {
   background-color: #836fce;
-  width: 335px;
+  width: 100%;
   margin-top: 20px;
 }
 
 .search-filters {
   background-color: rgb(146, 128, 200);
-  width: 335px;
+  width: 100%;
   padding: 20px;
 }
 
@@ -101,7 +101,7 @@
 }
 
 .pokemon-display {
-  width: 335px;
+  width: 100%;
   margin: auto;
 }
 
