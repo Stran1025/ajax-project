@@ -11,10 +11,65 @@
 </head>
 <body>
   <header>
+    <div class="container nav-bar">
+      <div class="row">
+        <div class="col-full">
+          <h1 class="white-text">PokéDex</h1>
+        </div>
+      </div>
+    </div>
   </header>
   <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-full">
+          <div id="search-bar" class="search-bar flex center-height center-width">
+            <h2 class="center-width white-text">Search</h2>
+            <i id="search-bar-arrow" class="fas fa-angle-down fa-2x"></i>
+          </div>
+          <form id="search-form">
+            <div id="search-filters" class="search-filters hidden center-width">
+              <div class="generation search-input center-width text-right search-label">
+                <label class="font-10 color-pink"> Generation
+                  <select id="generation" class="input-area color-pink font-10">
+                    <option value="generation/1">Generation 1</option>
+                    <option value="generation/2">Generation 2</option>
+                    <option value="generation/3">Generation 3</option>
+                    <option value="generation/4">Generation 4</option>
+                    <option value="generation/5">Generation 5</option>
+                    <option value="generation/6">Generation 6</option>
+                    <option value="generation/7">Generation 7</option>
+                    <option value="generation/8">Generation 8</option>
+                  </select>
+                </label>
+              </div>
+              <div class="name search-input center-width text-right search-label">
+                <label for="name" class="font-10 color-pink"> Pokémon Name</label>
+                <input id="name" type="text" class="input-area color-pink font-10">
+              </div>
+              <div class="type search-input center-width text-right search-label">
+                <label class="font-10 color-pink"> Type
+                  <select id="type" class="input-area color-pink font-10">
+                    <option value="">Select a type</option>
+                    <option value="fire">Fire</option>
+                    <option value="flying">Flying</option>
+                  </select>
+                </label>
+              </div>
+              <div class="center-width text-center center-width">
+                <button id="search-button" class="search-button font-10 color-pink search-label">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="pokemon-display" class="row flex-wrap flex-center pokemon-display">
+
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
+  <script src="https://kit.fontawesome.com/7cadc2a718.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,0 +1,26 @@
+.container {
+  margin: auto;
+  width: 375px;
+}
+
+.row {
+  display: flex;
+}
+
+.col-full {
+  width: 100%;
+}
+
+.col-third {
+  width: 30%;
+}
+
+@media only screen and (min-width: 992px) {
+  .container {
+    width: 992px;
+  }
+
+  .col-third {
+    width: 10.3%;
+  }
+}
