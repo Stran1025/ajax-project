@@ -27,38 +27,40 @@
             <h2 class="center-width white-text">Search</h2>
             <i id="search-bar-arrow" class="fas fa-angle-down fa-2x"></i>
           </div>
-          <div id="search-filters" class="search-filters hidden center-width">
-            <div class="generation search-input center-width text-right search-label">
-              <label class="font-10 color-pink"> Generation
-                <select class="input-area color-pink font-10">
-                  <option>Generation 1</option>
-                  <option>Generation 2</option>
-                  <option>Generation 3</option>
-                  <option>Generation 4</option>
-                  <option>Generation 5</option>
-                  <option>Generation 6</option>
-                  <option>Generation 7</option>
-                  <option>Generation 8</option>
-                </select>
-              </label>
+          <form id="search-form">
+            <div id="search-filters" class="search-filters hidden center-width">
+              <div class="generation search-input center-width text-right search-label">
+                <label class="font-10 color-pink"> Generation
+                  <select id="generation" class="input-area color-pink font-10">
+                    <option value="generation/1">Generation 1</option>
+                    <option value="generation/2">Generation 2</option>
+                    <option value="generation/3">Generation 3</option>
+                    <option value="generation/4">Generation 4</option>
+                    <option value="generation/5">Generation 5</option>
+                    <option value="generation/6">Generation 6</option>
+                    <option value="generation/7">Generation 7</option>
+                    <option value="generation/8">Generation 8</option>
+                  </select>
+                </label>
+              </div>
+              <div class="name search-input center-width text-right search-label">
+                <label for="name" class="font-10 color-pink"> Pokémon Name</label>
+                <input id="name" type="text" class="input-area color-pink font-10">
+              </div>
+              <div class="type search-input center-width text-right search-label">
+                <label class="font-10 color-pink"> Type
+                  <select id="type" class="input-area color-pink font-10">
+                    <option value="">Select a type</option>
+                    <option value="fire">Fire</option>
+                    <option value="flying">Flying</option>
+                  </select>
+                </label>
+              </div>
+              <div class="center-width text-center center-width">
+                <button id="search-button" class="search-button font-10 color-pink search-label">Search</button>
+              </div>
             </div>
-            <div class="name search-input center-width text-right search-label">
-              <label for="pokemon-name" class="font-10 color-pink"> Pokémon Name</label>
-              <input id="pokemon-name" type="text" class="input-area color-pink font-10">
-            </div>
-            <div class="type search-input center-width text-right search-label">
-              <label class="font-10 color-pink"> Type
-                <select class="input-area color-pink font-10">
-                  <option>Select a type</option>
-                  <option value="">Fire</option>
-                  <option value="">Flying</option>
-                </select>
-              </label>
-            </div>
-            <div class="search-button center-width search-label">
-              <p>test</p>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
       <div id="pokemon-display" class="row flex-wrap flex-center pokemon-display">

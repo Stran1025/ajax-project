@@ -2,13 +2,27 @@ var $searchBar = document.querySelector('#search-bar');
 var $searchFilter = document.querySelector('#search-filters');
 var $pokemonDisplay = document.querySelector('#pokemon-display');
 var $searchBarArrow = document.querySelector('#search-bar-arrow');
+var $searchButton = document.querySelector('#search-button');
+var $searchForm = document.querySelector('#search-form');
 
-$searchBar.addEventListener('click', handleClick);
+$searchBar.addEventListener('click', dropDownSearch);
+$searchButton.addEventListener('click', handleSearch);
 
-function handleClick(event) {
+function dropDownSearch(event) {
   $searchFilter.classList.toggle('hidden');
   $searchBarArrow.classList.toggle('fa-angle-up');
   $searchBarArrow.classList.toggle('fa-angle-down');
+}
+
+function handleSearch(event) {
+  event.preventDefault();
+  dropDownSearch();
+  while ($pokemonDisplay.firstChild) {
+    $pokemonDisplay.removeChild($pokemonDisplay.firstChild);
+  }
+  if ($searchForm.name.value !== '') {
+    sendRequest('https://pokeapi.co/api/v2/pokemon/' + $searchForm.name.value.toLowerCase());
+  }
 }
 
 var xhrGen1 = new XMLHttpRequest();
