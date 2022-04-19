@@ -1,0 +1,16 @@
+.container {
+  margin: auto;
+  width: 375px;
+}
+
+.row {
+  display: flex;
+}
+
+.col-full {
+  width: 100%;
+}
+
+.col-third {
+  width: 30%;
+}
