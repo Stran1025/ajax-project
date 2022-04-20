@@ -18,6 +18,7 @@ var $typeDisplay = document.querySelectorAll('.type-display');
 var $modal = document.querySelector('#modal');
 var $newTeamName = document.querySelector('#new-team-name');
 var $teamListDisplay = document.querySelector('#team-list-display');
+var $moveList = document.querySelectorAll('.move');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -33,7 +34,7 @@ var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
 xhrGen1.responseType = 'json';
 xhrGen1.addEventListener('load', handleXHR);
-// xhrGen1.send();
+xhrGen1.send();
 
 function handleTeamclicked(event) {
   var target = event.target.parentElement;
@@ -45,6 +46,12 @@ function handleTeamclicked(event) {
       data.team[i].addMember(data.currentPokemon);
       $modal.classList.add('hidden');
       data.currentPokemon = null;
+      data.currentView = 'search';
+      $customizeForm.reset();
+      switchView(data.currentView);
+      for (var j = 0; j < $moveList.length; j++) {
+        $moveList[j].classList.add('hidden');
+      }
       break;
     }
   }
