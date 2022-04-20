@@ -19,6 +19,10 @@
   width: 30%;
 }
 
+.col-fourth {
+  width: 25%;
+}
+
 @media only screen and (min-width: 992px) {
   .container {
     width: 992px;

@@ -19,6 +19,7 @@ var $modal = document.querySelector('#modal');
 var $newTeamName = document.querySelector('#new-team-name');
 var $teamListDisplay = document.querySelector('#team-list-display');
 var $moveList = document.querySelectorAll('.move');
+var $navBar = document.querySelector('.nav-bar');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -29,12 +30,21 @@ $customizeMove3.addEventListener('focusout', showNextMove);
 $customizeForm.addEventListener('submit', savePokemon);
 $newTeamName.addEventListener('focusout', makeTeam);
 $teamListDisplay.addEventListener('click', handleTeamclicked);
+$navBar.addEventListener('click', changeView);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
 xhrGen1.responseType = 'json';
 xhrGen1.addEventListener('load', handleXHR);
 xhrGen1.send();
+
+function changeView(event) {
+  if (!event.target.parentElement.hasAttribute('data-view')) {
+    return;
+  }
+  data.view = event.target.parentElement.getAttribute('data-view');
+  switchView(data.view);
+}
 
 function handleTeamclicked(event) {
   var target = event.target.parentElement;
@@ -46,9 +56,9 @@ function handleTeamclicked(event) {
       data.team[i].addMember(data.currentPokemon);
       $modal.classList.add('hidden');
       data.currentPokemon = null;
-      data.currentView = 'search';
+      data.view = 'search';
       $customizeForm.reset();
-      switchView(data.currentView);
+      switchView(data.view);
       for (var j = 0; j < $moveList.length; j++) {
         $moveList[j].classList.add('hidden');
       }
@@ -274,7 +284,7 @@ function createDiv(obj) {
   var $image = document.createElement('img');
   var $h3 = document.createElement('h3');
 
-  $col.className = 'col-third display-top-space';
+  $col.className = 'col-third display-top-space link';
   $head.className = 'pokemon-head center-width flex';
   $body.className = 'pokemon-body center-width';
   $icon.className = 'width-fourth';

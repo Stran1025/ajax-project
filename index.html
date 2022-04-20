@@ -13,9 +13,13 @@
   <header>
     <div class="container nav-bar">
       <div class="row">
-        <div class="col-full">
-          <h1 class="white-text">PokéDex</h1>
+        <div class="col-third" data-view="search">
+          <h1 class="white-text font-25 link">PokéDex</h1>
         </div>
+        <div class="col-third center-width" data-view="team">
+          <h1 class="white-text font-20 link">Teams</h1>
+        </div>
+        <div class="col-third"></div>
       </div>
     </div>
   </header>
@@ -23,7 +27,7 @@
     <div class="container view" data-view="search">
       <div class="row">
         <div class="col-full">
-          <div id="search-bar" class="search-bar flex center-height center-width">
+          <div id="search-bar" class="search-bar flex center-height center-width link">
             <h2 class="center-width white-text">Search</h2>
             <i id="search-bar-arrow" class="fas fa-angle-down fa-2x"></i>
           </div>
@@ -150,6 +154,13 @@
               <input id="new-team-name" type="text" class="font-10 blend center-width center-height margin-left-10" placeholder="Create New Team">
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="container view hidden" data-view="team">
+      <div class="row">
+        <div class="col-full">
+          <p>you have come to the rigth place</p>
         </div>
       </div>
     </div>
