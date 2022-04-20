@@ -20,7 +20,7 @@
     </div>
   </header>
   <main>
-    <div class="container">
+    <div class="container view" data-view="search">
       <div class="row">
         <div class="col-full">
           <div id="search-bar" class="search-bar flex center-height center-width">
@@ -65,6 +65,92 @@
       </div>
       <div id="pokemon-display" class="row flex-wrap flex-center pokemon-display">
 
+      </div>
+    </div>
+    <div class="container view margin-top-30 hidden" data-view="customize">
+      <form id="customize-pokemon">
+        <div class="row width-90 center-width">
+          <div class="col-half right-card">
+            <div class="pokemon-head-clear center-width flex margin-top-10">
+              <img class="width-fourth" src="images/Poké_Ball_icon.svg.png">
+              <h3 id="customize-pname" class="font-10">Charizard</h3>
+            </div>
+            <div class="text-center">
+              <img id="customize-pimage" class="center-width" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png">
+            </div>
+            <div class="text-center">
+              <img class="type-display icon" src="/images/type/flying.png">
+              <img class="type-display icon" src="/images/type/fire.png">
+            </div>
+            <div class="margin-top-10 text-center">
+              <label class=""><i class="fas fa-circle-plus"></i>
+                <select id="customize-ability" class="blend" name="ability">
+                  <option>Add ability</option>
+                </select>
+              </label>
+            </div>
+            <div class="margin-top-10 text-center">
+              <label class=""><i class="fas fa-circle-plus"></i>
+                <input class="blend" type="text" placeholder="Add item" name="item">
+              </label>
+            </div>
+            <div class="margin-top-10 margin-bottom-10 text-center">
+              <label class=""><i class="fas fa-circle-arrow-down"></i>
+                <select id="customize-nature" class="blend" name="nature">
+                  <option>Choose nature</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="col-half left-card">
+            <div class="margin-top-30 text-center">
+              <label class=""> <i class="fas fa-circle-plus"></i>
+                <select id="customize-move1" class="blend" name="move1">
+                  <option value="">Add move</option>
+                </select>
+              </label>
+            </div>
+            <div class="move margin-top-30 hidden customize-move1 text-center">
+              <label class=""> <i class="fas fa-circle-plus"></i>
+                <select id="customize-move2" class="blend" name="move2">
+                  <option value="">Add move</option>
+                </select>
+              </label>
+            </div>
+            <div class="move margin-top-30 hidden customize-move2 text-center">
+              <label class=""> <i class="fas fa-circle-plus"></i>
+                <select id="customize-move3" class="blend" name="move3">
+                  <option value="">Add move</option>
+                </select>
+              </label>
+            </div>
+            <div class="move margin-top-30 hidden customize-move3 text-center">
+              <label class=""> <i class="fas fa-circle-plus"></i>
+                <select id="customize-move4" class="blend" name="move4">
+                  <option value="">Add move</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row margin-top-10 width-90 center-width">
+          <div class="col-full text-right">
+            <button type="submit" id="add-pokemon" class="button">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="modal" class="container relative hidden">
+      <div class="row">
+        <div class="col-full">
+          <div class="overlay"></div>
+          <div id="team-list-display" class="modal flex center-width flex-column">
+            <div class="text-center width-full">
+              <i class="fas fa-circle-plus center-width"></i>
+              <input id="new-team-name" type="text" class="font-10 blend center-width center-height margin-left-10" placeholder="Create New Team">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>

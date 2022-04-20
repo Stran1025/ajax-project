@@ -11,6 +11,10 @@
   width: 100%;
 }
 
+.col-half {
+  width: 50%;
+}
+
 .col-third {
   width: 30%;
 }
