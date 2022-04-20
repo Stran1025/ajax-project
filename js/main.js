@@ -15,6 +15,9 @@ var $customizeMove3 = document.querySelector('#customize-move3');
 var $customizeMove4 = document.querySelector('#customize-move4');
 var $customizeForm = document.querySelector('#customize-pokemon');
 var $typeDisplay = document.querySelectorAll('.type-display');
+var $modal = document.querySelector('#modal');
+var $newTeamName = document.querySelector('#new-team-name');
+var $teamListDisplay = document.querySelector('#team-list-display');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -23,12 +26,39 @@ $customizeMove1.addEventListener('focusout', showNextMove);
 $customizeMove2.addEventListener('focusout', showNextMove);
 $customizeMove3.addEventListener('focusout', showNextMove);
 $customizeForm.addEventListener('submit', savePokemon);
+$newTeamName.addEventListener('focusout', makeTeam);
+$teamListDisplay.addEventListener('click', handleTeamclicked);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
 xhrGen1.responseType = 'json';
 xhrGen1.addEventListener('load', handleXHR);
-xhrGen1.send();
+// xhrGen1.send();
+
+function handleTeamclicked(event) {
+  var target = event.target.parentElement;
+  if (!target.hasAttribute('data-team')) {
+    return;
+  }
+  for (var i = 0; i < data.team.length; i++) {
+    if (data.team[i].name === target.getAttribute('data-team')) {
+      data.team[i].addMember(data.currentPokemon);
+      $modal.classList.add('hidden');
+      data.currentPokemon = null;
+      break;
+    }
+  }
+}
+
+function makeTeam(event) {
+  if (event.target.value === '') {
+    return;
+  }
+  var newTeam = new Team(event.target.value);
+  event.target.value = '';
+  data.team.push(newTeam);
+  getTeamList(data.team);
+}
 
 function savePokemon(event) {
   event.preventDefault();
@@ -37,8 +67,8 @@ function savePokemon(event) {
   var item = $customizeForm.item.value;
   var nature = $customizeForm.nature.value;
   var move = [$customizeForm.move1.value, $customizeForm.move2.value, $customizeForm.move3.value, $customizeForm.move4.value];
-  var test = new Pokemon(name, ability, item, nature, move);
-  return test;
+  data.currentPokemon = new Pokemon(name, ability, item, nature, move);
+  $modal.classList.remove('hidden');
 }
 
 function showNextMove(event) {
@@ -147,6 +177,30 @@ function handleXHR(event) {
 
 function loadCurrentPokemon(event) {
   $pokemonDisplay.appendChild(createDiv(event.target.response));
+}
+
+function getTeamList(array) {
+  // <div class="text-center">
+  //   <i class="fas fa-circle-plus center-width"></i>
+  //   <input id="new-team-name" type="text" class="font-10 blend center-width" placeholder="Create New Team">
+  // </div>
+  while ($teamListDisplay.childElementCount > 1) {
+    $teamListDisplay.removeChild($teamListDisplay.lastChild);
+  }
+  for (var i = 0; i < array.length; i++) {
+    var $teamDiv = document.createElement('div');
+    var $plusIcon = document.createElement('i');
+    var $teamName = document.createElement('button');
+
+    $teamName.className = 'font-10 blend text-left';
+    $plusIcon.className = 'fas fa-circle-plus center-width';
+    $teamDiv.className = 'flex margin-top-10';
+    $teamDiv.setAttribute('data-team', array[i].name);
+    $teamName.textContent = array[i].name;
+
+    $teamDiv.append($plusIcon, $teamName);
+    $teamListDisplay.appendChild($teamDiv);
+  }
 }
 
 function loadCurrentType(array) {
