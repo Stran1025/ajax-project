@@ -20,7 +20,7 @@
     </div>
   </header>
   <main>
-    <div class="container">
+    <div class="container view" data-view="search">
       <div class="row">
         <div class="col-full">
           <div id="search-bar" class="search-bar flex center-height center-width">
@@ -66,6 +66,60 @@
       <div id="pokemon-display" class="row flex-wrap flex-center pokemon-display">
 
       </div>
+    </div>
+    <div class="container view margin-top-30 hidden" data-view="customize">
+      <form id="customize-pokemon">
+        <div class="row width-90 center-width">
+          <div class="col-half right-card">
+            <div class="pokemon-head-clear center-width flex margin-top-10">
+              <img class="width-fourth" src="images/Poké_Ball_icon.svg.png">
+              <h3 id="customize-pname" class="font-10">Charizard</h3>
+            </div>
+            <div class="center-width margin-left-30">
+              <img id="customize-pimage" class="center-width" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png">
+            </div>
+            <div>
+              <img class="icon margin-left-30 type-display" src="/images/type/flying.png">
+              <img class="icon margin-left-30 type-display" src="/images/type/fire.png">
+            </div>
+            <div class="margin-top-10">
+              <label class="margin-left-30"><i class="fas fa-circle-plus"></i>
+                <select id="customize-ability" class="blend">
+                  <option>Add ability</option>
+                </select>
+              </label>
+            </div>
+            <div class="margin-top-10">
+              <label class="margin-left-30"><i class="fas fa-circle-plus"></i>
+                <select id="item" class="blend">
+                  <option>Add item</option>
+                </select>
+              </label>
+            </div>
+            <div class="margin-top-10 margin-bottom-10">
+              <label class="margin-left-30"><i class="fas fa-circle-arrow-down"></i>
+                <select id="nature" class="blend">
+                  <option>Choose nature</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="col-half left-card">
+            <div class="move margin-top-30">
+              <label class="margin-left-30"> <i class="fas fa-circle-plus"></i>
+                <select id="move" class="blend">
+                  <option>Add move</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-full">
+            <button>Add</button>
+          </div>
+        </div>
+      </form>
     </div>
   </main>
   <script src="js/data.js"></script>
