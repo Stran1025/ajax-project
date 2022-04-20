@@ -67,7 +67,7 @@
 
       </div>
     </div>
-    <div class="container view margin-top-30 hidden" data-view="customize">
+    <div class="container view margin-top-30" data-view="customize">
       <form id="customize-pokemon">
         <div class="row width-90 center-width">
           <div class="col-half right-card">
@@ -79,24 +79,24 @@
               <img id="customize-pimage" class="center-width" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png">
             </div>
             <div>
-              <img class="icon margin-left-30 type-display" src="/images/type/flying.png">
-              <img class="icon margin-left-30 type-display" src="/images/type/fire.png">
+              <img class="type-display icon margin-left-30 type-display" src="/images/type/flying.png">
+              <img class="type-display icon margin-left-30 type-display" src="/images/type/fire.png">
             </div>
             <div class="margin-top-10">
               <label class="margin-left-30"><i class="fas fa-circle-plus"></i>
-                <select id="customize-ability" class="blend">
+                <select id="customize-ability" class="blend" name="ability">
                   <option>Add ability</option>
                 </select>
               </label>
             </div>
             <div class="margin-top-10">
               <label class="margin-left-30"><i class="fas fa-circle-plus"></i>
-                <input class="blend" type="text" placeholder="Add item">
+                <input class="blend" type="text" placeholder="Add item" name="item">
               </label>
             </div>
             <div class="margin-top-10 margin-bottom-10">
               <label class="margin-left-30"><i class="fas fa-circle-arrow-down"></i>
-                <select id="customize-nature" class="blend">
+                <select id="customize-nature" class="blend" name="nature">
                   <option>Choose nature</option>
                 </select>
               </label>
@@ -105,37 +105,37 @@
           <div class="col-half left-card">
             <div class="move margin-top-30">
               <label class="margin-left-30"> <i class="fas fa-circle-plus"></i>
-                <select id="customize-move1" class="blend">
+                <select id="customize-move1" class="blend" name="move1">
                   <option value="">Add move</option>
                 </select>
               </label>
             </div>
             <div class="move margin-top-30 hidden customize-move1">
               <label class="margin-left-30"> <i class="fas fa-circle-plus"></i>
-                <select id="customize-move2" class="blend">
+                <select id="customize-move2" class="blend" name="move2">
                   <option value="">Add move</option>
                 </select>
               </label>
             </div>
             <div class="move margin-top-30 hidden customize-move2">
               <label class="margin-left-30"> <i class="fas fa-circle-plus"></i>
-                <select id="customize-move3" class="blend">
+                <select id="customize-move3" class="blend" name="move3">
                   <option value="">Add move</option>
                 </select>
               </label>
             </div>
             <div class="move margin-top-30 hidden customize-move3">
               <label class="margin-left-30"> <i class="fas fa-circle-plus"></i>
-                <select id="customize-move4" class="blend">
+                <select id="customize-move4" class="blend" name="move4">
                   <option value="">Add move</option>
                 </select>
               </label>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-full">
-            <button>Add</button>
+        <div class="row margin-top-10 width-90 center-width">
+          <div class="col-full text-right">
+            <button type="submit" id="add-pokemon" class="button">Add</button>
           </div>
         </div>
       </form>

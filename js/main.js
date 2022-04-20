@@ -13,6 +13,8 @@ var $customizeMove1 = document.querySelector('#customize-move1');
 var $customizeMove2 = document.querySelector('#customize-move2');
 var $customizeMove3 = document.querySelector('#customize-move3');
 var $customizeMove4 = document.querySelector('#customize-move4');
+var $customizeForm = document.querySelector('#customize-pokemon');
+var $typeDisplay = document.querySelectorAll('.type-display');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -20,12 +22,24 @@ $pokemonDisplay.addEventListener('click', handleDisplayClick);
 $customizeMove1.addEventListener('focusout', showNextMove);
 $customizeMove2.addEventListener('focusout', showNextMove);
 $customizeMove3.addEventListener('focusout', showNextMove);
+$customizeForm.addEventListener('submit', savePokemon);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
 xhrGen1.responseType = 'json';
 xhrGen1.addEventListener('load', handleXHR);
 xhrGen1.send();
+
+function savePokemon(event) {
+  event.preventDefault();
+  var name = $customizePName.textContent;
+  var ability = $customizeForm.ability.value;
+  var item = $customizeForm.item.value;
+  var nature = $customizeForm.nature.value;
+  var move = [$customizeForm.move1.value, $customizeForm.move2.value, $customizeForm.move3.value, $customizeForm.move4.value];
+  var test = new Pokemon(name, ability, item, nature, move);
+  return test;
+}
 
 function showNextMove(event) {
   var next = document.querySelector('.' + event.target.getAttribute('id'));
@@ -78,6 +92,8 @@ function loadclickedPokemon(event) {
     $customizeMove3.appendChild($moveOption3);
     $customizeMove4.appendChild($moveOption4);
   }
+  data.currentType = response.types;
+  loadCurrentType(data.currentType);
 }
 
 function loadNaturelist(event) {
@@ -131,6 +147,17 @@ function handleXHR(event) {
 
 function loadCurrentPokemon(event) {
   $pokemonDisplay.appendChild(createDiv(event.target.response));
+}
+
+function loadCurrentType(array) {
+  for (var i = 0; i < array.length; i++) {
+    $typeDisplay[i].setAttribute('src', '/images/type/' + array[i].type.name + '.png');
+  }
+  if (array.length < $typeDisplay.length) {
+    $typeDisplay[1].classList.add('hidden');
+  } else {
+    $typeDisplay[1].classList.remove('hidden');
+  }
 }
 
 function switchView(view) {
@@ -203,3 +230,23 @@ function createDiv(obj) {
 
   return $col;
 }
+
+function Pokemon(name, ability, item, nature, moveArray) {
+  this.name = name;
+  this.ability = ability;
+  this.item = item;
+  this.move = moveArray;
+}
+
+function Team(name) {
+  this.name = name;
+  this.members = [];
+}
+
+Team.prototype.isFull = function () {
+  return this.members.length >= 6;
+};
+
+Team.prototype.addMember = function (member) {
+  this.members.push(member);
+};
