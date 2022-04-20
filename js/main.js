@@ -8,16 +8,29 @@ var $views = document.querySelectorAll('.view');
 var $customizePName = document.querySelector('#customize-pname');
 var $customizePImage = document.querySelector('#customize-pimage');
 var $customizeAbility = document.querySelector('#customize-ability');
+var $customizeNature = document.querySelector('#customize-nature');
+var $customizeMove1 = document.querySelector('#customize-move1');
+var $customizeMove2 = document.querySelector('#customize-move2');
+var $customizeMove3 = document.querySelector('#customize-move3');
+var $customizeMove4 = document.querySelector('#customize-move4');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
 $pokemonDisplay.addEventListener('click', handleDisplayClick);
+$customizeMove1.addEventListener('focusout', showNextMove);
+$customizeMove2.addEventListener('focusout', showNextMove);
+$customizeMove3.addEventListener('focusout', showNextMove);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
 xhrGen1.responseType = 'json';
 xhrGen1.addEventListener('load', handleXHR);
 xhrGen1.send();
+
+function showNextMove(event) {
+  var next = document.querySelector('.' + event.target.getAttribute('id'));
+  next.classList.remove('hidden');
+}
 
 function handleDisplayClick(event) {
   var clickedelement = event.target.parentElement.parentElement;
@@ -29,6 +42,11 @@ function handleDisplayClick(event) {
   xhrEdit.responseType = 'json';
   xhrEdit.addEventListener('load', loadclickedPokemon);
   xhrEdit.send();
+  var xhrNature = new XMLHttpRequest();
+  xhrNature.open('GET', 'https://pokeapi.co/api/v2/nature?limit=30');
+  xhrNature.responseType = 'json';
+  xhrNature.addEventListener('load', loadNaturelist);
+  xhrNature.send();
   data.view = 'customize';
   switchView(data.view);
 }
@@ -46,6 +64,29 @@ function loadclickedPokemon(event) {
       $abilityOption.setAttribute('value', response.abilities[abilityIndex].ability.name);
       $customizeAbility.appendChild($abilityOption);
     }
+  }
+  for (var moveIndex = 0; moveIndex < response.moves.length; moveIndex++) {
+    var $moveOption = document.createElement('option');
+    $moveOption.textContent = response.moves[moveIndex].move.name[0].toUpperCase() + response.moves[moveIndex].move.name.slice(1);
+    $moveOption.value = response.moves[moveIndex].move.name;
+    var $moveOption1 = $moveOption.cloneNode(true);
+    var $moveOption2 = $moveOption.cloneNode(true);
+    var $moveOption3 = $moveOption.cloneNode(true);
+    var $moveOption4 = $moveOption.cloneNode(true);
+    $customizeMove1.appendChild($moveOption1);
+    $customizeMove2.appendChild($moveOption2);
+    $customizeMove3.appendChild($moveOption3);
+    $customizeMove4.appendChild($moveOption4);
+  }
+}
+
+function loadNaturelist(event) {
+  var response = event.target.response.results;
+  for (var natureIndex = 0; natureIndex < response.length; natureIndex++) {
+    var $natureOption = document.createElement('option');
+    $natureOption.textContent = response[natureIndex].name[0].toUpperCase() + response[natureIndex].name.slice(1);
+    $natureOption.value = response[natureIndex].name;
+    $customizeNature.appendChild($natureOption);
   }
 }
 
