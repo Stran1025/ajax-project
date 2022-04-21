@@ -96,6 +96,10 @@
   color: #9c88af;
 }
 
+.color-gray {
+  color: #a6a6a6;
+}
+
 .width-fourth {
   width: 25%;
 }
@@ -147,13 +151,13 @@
   height: 25px;
 }
 
-.right-card {
+.left-card {
   border: 1px solid black;
   border-radius: 8px 0 0 8px;
   background: #cee5ed;
 }
 
-.left-card {
+.right-card {
   border: 1px solid black;
   border-radius: 0 8px 8px 0;
 }
@@ -224,4 +228,26 @@ header {
 
 .team-header {
   background-color: #836fce;
+}
+
+.detail-heading {
+  margin-left: 25%;
+}
+
+div.left-card > div.pokemon-head {
+  background-color: #cee5ed;
+}
+
+div.left-card > div.pokemon-body {
+  border: none;
+}
+
+.sml-width-90 {
+  width: 90%;
+}
+
+@media only screen and (min-width: 992px) {
+  .sml-width-90 {
+    width: 30%;
+  }
 }
