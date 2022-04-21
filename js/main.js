@@ -424,16 +424,18 @@ function createDetailDiv(obj) {
   var $col = document.createElement('div');
   var $teamHead = document.createElement('div');
   var $teamName = document.createElement('h3');
+  var $cardHolder = document.createElement('div');
 
   $col.className = 'col-full';
   $teamHead.className = 'team-header text-center';
   $teamName.className = 'white-text';
+  $cardHolder.className = 'flex flex-wrap';
 
   $teamName.textContent = obj.name;
 
   $teamHead.appendChild($teamName);
 
-  $col.append($teamHead);
+  $col.append($teamHead, $cardHolder);
 
   for (var pokemonIndex = 0; pokemonIndex < obj.members.length; pokemonIndex++) {
     var $wholeCard = document.createElement('div');
@@ -467,7 +469,7 @@ function createDetailDiv(obj) {
       $rightCard.append($moveDiv);
     }
 
-    $wholeCard.className = 'row width-90 center-width margin-top-30';
+    $wholeCard.className = 'row sml-width-90 center-width margin-top-30';
     $leftCard.className = 'col-half left-card';
     $iconDiv.className = 'text-center';
     $typeIcon1.className = 'type-display icon';
@@ -499,7 +501,7 @@ function createDetailDiv(obj) {
     $natureDiv.append($nature, $natureName);
     $leftCard.append($iconDiv, $abilityDiv, $itemDiv, $natureDiv);
     $wholeCard.append($leftCard, $rightCard);
-    $col.appendChild($wholeCard);
+    $cardHolder.appendChild($wholeCard);
   }
   return $col;
 }

@@ -241,3 +241,13 @@ div.left-card > div.pokemon-head {
 div.left-card > div.pokemon-body {
   border: none;
 }
+
+.sml-width-90 {
+  width: 90%;
+}
+
+@media only screen and (min-width: 992px) {
+  .sml-width-90 {
+    width: 30%;
+  }
+}
