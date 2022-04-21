@@ -237,6 +237,7 @@ function loadTeam(array) {
     $teamName.className = 'white-text';
     $teamBody.className = 'team-body flex flex-wrap flex-center';
     $teamName.textContent = array[i].name;
+    $teamHead.setAttribute('data-team', array[i].name);
 
     $col.append($teamHead, $teamBody);
     $teamHead.appendChild($teamName);
