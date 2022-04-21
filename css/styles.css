@@ -1,3 +1,7 @@
+* {
+  font-family: sans-serif;
+}
+
 .flex {
   display: flex;
 }
@@ -36,6 +40,14 @@
 
 .font-10 {
   font-size: 10px;
+}
+
+.font-20 {
+  font-size: 20px;
+}
+
+.font-25 {
+  font-size: 25px;
 }
 
 .input-area {
@@ -194,10 +206,22 @@
   background-color: white;
   border: none;
   top: -100px;
-  left: 70px;
+  left: 25%;
   padding: 30px 50px;
 }
 
 .type-display {
   margin: 0 10px;
+}
+
+.link:hover {
+  cursor: pointer;
+}
+
+header {
+  background-color: rgb(0, 100, 148);
+}
+
+.team-header {
+  background-color: #836fce;
 }

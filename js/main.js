@@ -19,6 +19,8 @@ var $modal = document.querySelector('#modal');
 var $newTeamName = document.querySelector('#new-team-name');
 var $teamListDisplay = document.querySelector('#team-list-display');
 var $moveList = document.querySelectorAll('.move');
+var $navBar = document.querySelector('.nav-bar');
+var $teamDisplay = document.querySelector('#team-display');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -29,12 +31,21 @@ $customizeMove3.addEventListener('focusout', showNextMove);
 $customizeForm.addEventListener('submit', savePokemon);
 $newTeamName.addEventListener('focusout', makeTeam);
 $teamListDisplay.addEventListener('click', handleTeamclicked);
+$navBar.addEventListener('click', changeView);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
 xhrGen1.responseType = 'json';
 xhrGen1.addEventListener('load', handleXHR);
 xhrGen1.send();
+
+function changeView(event) {
+  if (!event.target.parentElement.hasAttribute('data-view')) {
+    return;
+  }
+  data.view = event.target.parentElement.getAttribute('data-view');
+  switchView(data.view);
+}
 
 function handleTeamclicked(event) {
   var target = event.target.parentElement;
@@ -46,14 +57,22 @@ function handleTeamclicked(event) {
       data.team[i].addMember(data.currentPokemon);
       $modal.classList.add('hidden');
       data.currentPokemon = null;
-      data.currentView = 'search';
+      data.view = 'team';
       $customizeForm.reset();
-      switchView(data.currentView);
+      switchView(data.view);
+      clearTeam();
+      loadTeam(data.team);
       for (var j = 0; j < $moveList.length; j++) {
         $moveList[j].classList.add('hidden');
       }
       break;
     }
+  }
+}
+
+function clearTeam() {
+  while ($teamDisplay.firstChild) {
+    $teamDisplay.removeChild($teamDisplay.firstChild);
   }
 }
 
@@ -186,6 +205,45 @@ function loadCurrentPokemon(event) {
   $pokemonDisplay.appendChild(createDiv(event.target.response));
 }
 
+function loadTeam(array) {
+  // <div class="col-full">
+  //   <div class="team-header text-center">
+  //     <h3 class="white-text">Team Name</h3>
+  //   </div>
+  //   <div class="team-body">
+  //     <div class="">
+  //       <div class="pokemon-head center-width flex">
+  //         <img src="/images/Poké_Ball_icon.svg.png">
+  //           <h3 class="font-10">Charizard</h3>
+  //       </div>
+  //       <div class="pokemon-body center-width">
+  //         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png">
+  //       </div>
+  //     </div>
+  //   </div>
+  // </div>
+  for (var i = 0; i < array.length; i++) {
+    var $col = document.createElement('div');
+    var $teamHead = document.createElement('div');
+    var $teamBody = document.createElement('div');
+    var $teamName = document.createElement('h3');
+    for (var j = 0; j < array[i].members.length; j++) {
+      var $teamMember = createDiv(array[i].members[j]);
+      $teamBody.appendChild($teamMember);
+    }
+
+    $col.className = 'col-full';
+    $teamHead.className = 'team-header text-center';
+    $teamName.className = 'white-text';
+    $teamBody.className = 'team-body flex flex-wrap flex-center';
+    $teamName.textContent = array[i].name;
+
+    $col.append($teamHead, $teamBody);
+    $teamHead.appendChild($teamName);
+    $teamDisplay.appendChild($col);
+  }
+}
+
 function getTeamList(array) {
   // <div class="text-center">
   //   <i class="fas fa-circle-plus center-width"></i>
@@ -274,7 +332,7 @@ function createDiv(obj) {
   var $image = document.createElement('img');
   var $h3 = document.createElement('h3');
 
-  $col.className = 'col-third display-top-space';
+  $col.className = 'col-third display-top-space link';
   $head.className = 'pokemon-head center-width flex';
   $body.className = 'pokemon-body center-width';
   $icon.className = 'width-fourth';
@@ -297,6 +355,8 @@ function Pokemon(name, ability, item, nature, moveArray) {
   this.ability = ability;
   this.item = item;
   this.move = moveArray;
+  this.sprites = {};
+  this.sprites.front_default = $customizePImage.getAttribute('src');
 }
 
 function Team(name) {

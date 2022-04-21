@@ -2,7 +2,7 @@
 
 var data = {
   editing: null,
-  currentView: 'search',
+  view: 'search',
   currentType: [],
   currentPokemon: null,
   team: []
