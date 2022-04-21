@@ -21,6 +21,7 @@ var $teamListDisplay = document.querySelector('#team-list-display');
 var $moveList = document.querySelectorAll('.move');
 var $navBar = document.querySelector('.nav-bar');
 var $teamDisplay = document.querySelector('#team-display');
+var $teamDetailDisplay = document.querySelector('#team-detail-display');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -32,12 +33,28 @@ $customizeForm.addEventListener('submit', savePokemon);
 $newTeamName.addEventListener('focusout', makeTeam);
 $teamListDisplay.addEventListener('click', handleTeamclicked);
 $navBar.addEventListener('click', changeView);
+$teamDisplay.addEventListener('click', handleTeamDisplayClick);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
 xhrGen1.responseType = 'json';
 xhrGen1.addEventListener('load', handleXHR);
 // xhrGen1.send();
+
+function handleTeamDisplayClick(event) {
+  if (!event.target.parentElement.hasAttribute('data-team')) {
+    return;
+  }
+  for (var i = 0; i < data.team.length; i++) {
+    if (data.team[i].name === event.target.parentElement.getAttribute('data-team')) {
+      switchView('team-detail');
+      while ($teamDetailDisplay.firstChild) {
+        $teamDetailDisplay.removeChild($teamDetailDisplay.firstChild);
+      }
+      $teamDetailDisplay.appendChild(createDetailDiv(data.team[i]));
+    }
+  }
+}
 
 function changeView(event) {
   if (!event.target.parentElement.hasAttribute('data-view')) {
@@ -321,10 +338,6 @@ function createDiv(obj) {
   //       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png">
   //     </div>
   //   </div >
-  // var xhrPokemon = new XMLHttpRequest();
-  // xhrPokemon.open('GET', pokemonLink);
-  // xhrPokemon.send();
-  // var response = xhrPokemon.response;
 
   var $col = document.createElement('div');
   var $head = document.createElement('div');
@@ -339,9 +352,9 @@ function createDiv(obj) {
   $icon.className = 'width-fourth';
   $icon.setAttribute('src', 'images/Poké_Ball_icon.svg.png');
   $image.setAttribute('src', obj.sprites.front_default);
+  $col.setAttribute('data-pokemon', obj.name);
   $h3.className = 'font-10';
   $h3.textContent = obj.name[0].toUpperCase() + obj.name.slice(1);
-  $col.setAttribute('data-pokemon', obj.name);
   $col.appendChild($head);
   $col.appendChild($body);
   $head.appendChild($icon);
@@ -351,13 +364,149 @@ function createDiv(obj) {
   return $col;
 }
 
+function createDetailDiv(obj) {
+  // <div class="col-full">
+  //   <div class="team-header text-center">
+  //     <h3 class="white-text">Test</h3>
+  //   </div>
+  //   <div class="row width-90 center-width">
+  //     <div class="col-half right-card">
+  //       <div class="pokemon-head-clear center-width flex margin-top-10">
+  //         <img class="width-fourth" src="images/Poké_Ball_icon.svg.png">
+  //           <h3 class="font-10">Charizard</h3>
+  //       </div>
+  //       <div class="text-center">
+  //         <img class="center-width" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png">
+  //       </div>
+  //       <div class="text-center">
+  //         <img class="type-display icon" src="/images/type/flying.png">
+  //           <img class="type-display icon" src="/images/type/fire.png">
+  //           </div>
+  //           <div class="text-center flex">
+  //             <p class="font-10 detail-heading">Ability:</p>
+  //             <p class="font-10"> Blaze</p>
+  //           </div>
+  //           <div class="text-center flex">
+  //             <p class="font-10 detail-heading">Item:</p>
+  //             <p class="font-10"> Leftovers</p>
+  //           </div>
+  //           <div class="text-center flex">
+  //             <p class="font-10 detail-heading">Nature:</p>
+  //             <p class="font-10"> Bold</p>
+  //           </div>
+  //       </div>
+  //       <div class="col-half left-card">
+  //         <div class="margin-top-30 text-center flex">
+  //           <p class="font-10 detail-heading">Move 1:</p>
+  //           <p class="font-10">Flamethrower</p>
+  //         </div>
+  //         <div class="margin-top-30 text-center flex">
+  //           <p class="font-10 detail-heading">Move 2:</p>
+  //           <p class="font-10">Fly</p>
+  //         </div>
+  //         <div class="margin-top-30 text-center flex">
+  //           <p class="font-10 detail-heading">Move 3:</p>
+  //           <p class="font-10">Body Slam</p>
+  //         </div>
+  //         <div class="margin-top-30 text-center flex">
+  //           <p class="font-10 detail-heading">Move 4:</p>
+  //           <p class="font-10">Cut</p>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </div>
+  var $col = document.createElement('div');
+  var $teamHead = document.createElement('div');
+  var $teamName = document.createElement('h3');
+
+  $col.className = 'col-full';
+  $teamHead.className = 'team-header text-center';
+  $teamName.className = 'white-text';
+
+  $teamName.textContent = obj.name;
+
+  $teamHead.appendChild($teamName);
+
+  $col.append($teamHead);
+
+  for (var pokemonIndex = 0; pokemonIndex < obj.members.length; pokemonIndex++) {
+    var $wholeCard = document.createElement('div');
+    var $leftCard = createDiv(obj.members[pokemonIndex]);
+    var $iconDiv = document.createElement('div');
+    var $typeIcon1 = document.createElement('img');
+    var $typeIcon2 = document.createElement('img');
+    var $abilityDiv = document.createElement('div');
+    var $ability = document.createElement('p');
+    var $abilityName = document.createElement('p');
+    var $itemDiv = document.createElement('div');
+    var $item = document.createElement('p');
+    var $itemName = document.createElement('p');
+    var $natureDiv = document.createElement('div');
+    var $nature = document.createElement('p');
+    var $natureName = document.createElement('p');
+    var $rightCard = document.createElement('div');
+    for (var moveIndex = 0; moveIndex < obj.members[pokemonIndex].move.length; moveIndex++) {
+      var $moveDiv = document.createElement('div');
+      var $move = document.createElement('p');
+      var $moveName = document.createElement('p');
+
+      $moveDiv.className = 'text-center flex margin-top-30';
+      $move.className = 'font-10 detail-heading';
+      $moveName.className = 'font-10 margin-left-10';
+
+      $move.textContent = 'Move ' + (moveIndex + 1) + ':';
+      $moveName.textContent = obj.members[pokemonIndex].move[moveIndex];
+
+      $moveDiv.append($move, $moveName);
+      $rightCard.append($moveDiv);
+    }
+
+    $wholeCard.className = 'row width-90 center-width margin-top-30';
+    $leftCard.className = 'col-half left-card';
+    $iconDiv.className = 'text-center';
+    $typeIcon1.className = 'type-display icon';
+    $typeIcon2.className = 'type-display icon';
+    $abilityDiv.className = 'text-center flex';
+    $ability.className = 'font-10 detail-heading';
+    $abilityName.className = 'font-10 margin-left-10';
+    $itemDiv.className = 'text-center flex';
+    $item.className = 'font-10 detail-heading';
+    $itemName.className = 'font-10 margin-left-10';
+    $natureDiv.className = 'text-center flex';
+    $nature.className = 'font-10 detail-heading';
+    $natureName.className = 'font-10 margin-left-10';
+    $rightCard.className = 'col-half right-card';
+
+    $ability.textContent = 'Ability:';
+    $abilityName.textContent = obj.members[pokemonIndex].ability;
+    $item.textContent = 'Item:';
+    $itemName.textContent = obj.members[pokemonIndex].item;
+    $nature.textContent = 'Nature:';
+    $natureName.textContent = obj.members[pokemonIndex].nature;
+
+    $typeIcon1.setAttribute('src', obj.members[pokemonIndex].type[0]);
+    $typeIcon2.setAttribute('src', obj.members[pokemonIndex].type[1]);
+
+    $iconDiv.append($typeIcon1, $typeIcon2);
+    $abilityDiv.append($ability, $abilityName);
+    $itemDiv.append($item, $itemName);
+    $natureDiv.append($nature, $natureName);
+    $leftCard.append($iconDiv, $abilityDiv, $itemDiv, $natureDiv);
+    $wholeCard.append($leftCard, $rightCard);
+    $col.appendChild($wholeCard);
+  }
+  return $col;
+}
+
 function Pokemon(name, ability, item, nature, moveArray) {
   this.name = name;
   this.ability = ability;
   this.item = item;
   this.move = moveArray;
+  this.nature = nature;
   this.sprites = {};
   this.sprites.front_default = $customizePImage.getAttribute('src');
+  this.type = [$typeDisplay[0].getAttribute('src'), $typeDisplay[1].getAttribute('src')];
 }
 
 function Team(name) {

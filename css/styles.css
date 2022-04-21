@@ -147,13 +147,13 @@
   height: 25px;
 }
 
-.right-card {
+.left-card {
   border: 1px solid black;
   border-radius: 8px 0 0 8px;
   background: #cee5ed;
 }
 
-.left-card {
+.right-card {
   border: 1px solid black;
   border-radius: 0 8px 8px 0;
 }
@@ -228,4 +228,12 @@ header {
 
 .detail-heading {
   margin-left: 25%;
+}
+
+div.left-card > div.pokemon-head {
+  background-color: #cee5ed;
+}
+
+div.left-card > div.pokemon-body {
+  border: none;
 }
