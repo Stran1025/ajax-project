@@ -41,7 +41,7 @@ var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
 xhrGen1.responseType = 'json';
 xhrGen1.addEventListener('load', handleXHR);
-// xhrGen1.send();
+xhrGen1.send();
 
 function handleTeamDisplayClick(event) {
   if (!event.target.parentElement.hasAttribute('data-team')) {
