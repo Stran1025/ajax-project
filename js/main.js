@@ -22,6 +22,7 @@ var $moveList = document.querySelectorAll('.move');
 var $navBar = document.querySelector('.nav-bar');
 var $teamDisplay = document.querySelector('#team-display');
 var $teamDetailDisplay = document.querySelector('#team-detail-display');
+var $teamDetailAddPokemon = document.querySelector('#detail-add-pokemon');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -34,6 +35,7 @@ $newTeamName.addEventListener('focusout', makeTeam);
 $teamListDisplay.addEventListener('click', handleTeamclicked);
 $navBar.addEventListener('click', changeView);
 $teamDisplay.addEventListener('click', handleTeamDisplayClick);
+$teamDetailAddPokemon.addEventListener('click', changeView);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
@@ -48,10 +50,14 @@ function handleTeamDisplayClick(event) {
   for (var i = 0; i < data.team.length; i++) {
     if (data.team[i].name === event.target.parentElement.getAttribute('data-team')) {
       switchView('team-detail');
+      $teamDetailAddPokemon.classList.add('hidden');
       while ($teamDetailDisplay.firstChild) {
         $teamDetailDisplay.removeChild($teamDetailDisplay.firstChild);
       }
       $teamDetailDisplay.appendChild(createDetailDiv(data.team[i]));
+      if (data.team[i].members.length < 6) {
+        $teamDetailAddPokemon.classList.remove('hidden');
+      }
     }
   }
 }
