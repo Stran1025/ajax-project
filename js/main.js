@@ -57,7 +57,7 @@ function handleTeamclicked(event) {
       data.team[i].addMember(data.currentPokemon);
       $modal.classList.add('hidden');
       data.currentPokemon = null;
-      data.view = 'search';
+      data.view = 'team';
       $customizeForm.reset();
       switchView(data.view);
       clearTeam();
