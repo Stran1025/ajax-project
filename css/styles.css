@@ -225,3 +225,7 @@ header {
 .team-header {
   background-color: #836fce;
 }
+
+.detail-heading {
+  margin-left: 25%;
+}
