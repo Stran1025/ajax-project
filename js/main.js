@@ -23,6 +23,8 @@ var $navBar = document.querySelector('.nav-bar');
 var $teamDisplay = document.querySelector('#team-display');
 var $teamDetailDisplay = document.querySelector('#team-detail-display');
 var $teamDetailAddPokemon = document.querySelector('#detail-add-pokemon');
+var $deleteQuestion = document.querySelector('#delete-question');
+var $deleteModal = document.querySelector('#delete-modal');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -62,6 +64,10 @@ function handleTeamDisplayClick(event) {
   }
 }
 
+function removePokemon(event) {
+  $deleteModal.classList.remove('hidden');
+  $deleteQuestion.textContent = 'Do you want to release ' + event.target.getAttribute('data-pokemon') + '?';
+}
 function changeView(event) {
   if (!event.target.parentElement.hasAttribute('data-view')) {
     return;
@@ -489,6 +495,8 @@ function createDetailDiv(obj) {
     $natureName.className = 'font-10 margin-left-10';
     $rightCard.className = 'col-half right-card relative';
 
+    $deleteIcon.addEventListener('click', removePokemon);
+
     $ability.textContent = 'Ability:';
     $abilityName.textContent = obj.members[pokemonIndex].ability;
     $item.textContent = 'Item:';
@@ -498,6 +506,8 @@ function createDetailDiv(obj) {
 
     $typeIcon1.setAttribute('src', obj.members[pokemonIndex].type[0]);
     $typeIcon2.setAttribute('src', obj.members[pokemonIndex].type[1]);
+    $deleteIcon.setAttribute('data-pokemon', obj.members[pokemonIndex].name);
+    $deleteIcon.setAttribute('data-team', obj.name);
 
     $deleteIconDiv.append($deleteIcon);
     $rightCard.appendChild($deleteIconDiv);
