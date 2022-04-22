@@ -42,7 +42,6 @@ $teamDisplay.addEventListener('click', handleTeamDisplayClick);
 $teamDetailAddPokemon.addEventListener('click', changeView);
 $deleteModalNo.addEventListener('click', closeDeleteModal);
 $deleteModalYes.addEventListener('click', deletePokemon);
-document.addEventListener('DOMContentLoaded', resetTeam());
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
