@@ -116,7 +116,7 @@ button:hover,
 label:hover,
 input:hover,
 select:hover,
-i.fa-trash-can:hover {
+.delete-icon:hover {
   cursor: pointer;
 }
 
@@ -284,18 +284,26 @@ a:active {
   padding: 10px 20px;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
+  .modal {
+    left: 40%;
+  }
+
+  .delete-modal {
+    left: 30%;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
   .sml-width-90 {
     width: 30%;
   }
 
   .modal {
-    bottom: 150px;
     left: 43%;
   }
 
   .delete-modal {
-    bottom: 150vh;
     left: 40%;
   }
 }
