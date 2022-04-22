@@ -272,3 +272,19 @@ div.left-card > div.pokemon-body {
   display: flex;
   justify-content: space-between;
 }
+
+.no-button {
+  background-color: #dfdfdf;
+  color: #9f9f9f;
+  border: none;
+  border-radius: 2px;
+  padding: 10px 20px;
+}
+
+.yes-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 10px 20px;
+}
