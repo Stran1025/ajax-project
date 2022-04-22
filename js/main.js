@@ -23,6 +23,10 @@ var $navBar = document.querySelector('.nav-bar');
 var $teamDisplay = document.querySelector('#team-display');
 var $teamDetailDisplay = document.querySelector('#team-detail-display');
 var $teamDetailAddPokemon = document.querySelector('#detail-add-pokemon');
+var $deleteQuestion = document.querySelector('#delete-question');
+var $deleteModal = document.querySelector('#delete-modal');
+var $deleteModalNo = document.querySelector('#delete-modal-no');
+var $deleteModalYes = document.querySelector('#delete-modal-yes');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -36,6 +40,8 @@ $teamListDisplay.addEventListener('click', handleTeamclicked);
 $navBar.addEventListener('click', changeView);
 $teamDisplay.addEventListener('click', handleTeamDisplayClick);
 $teamDetailAddPokemon.addEventListener('click', changeView);
+$deleteModalNo.addEventListener('click', closeDeleteModal);
+$deleteModalYes.addEventListener('click', deletePokemon);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
@@ -60,6 +66,32 @@ function handleTeamDisplayClick(event) {
       }
     }
   }
+}
+
+function openDeleteModal(event) {
+  $deleteModal.classList.remove('hidden');
+  $deleteQuestion.textContent = 'Do you want to release ' + event.target.getAttribute('data-pokemon') + '?';
+  for (var i = 0; i < data.team.length; i++) {
+    if (data.team[i].name === event.target.getAttribute('data-team')) {
+      data.editing = data.team[i];
+      for (var j = 0; j < data.team[i].members.length; j++) {
+        if (data.team[i].members[j].name === event.target.getAttribute('data-pokemon')) {
+          data.currentPokemon = data.team[i].members[j];
+          break;
+        }
+      }
+    }
+  }
+}
+
+function closeDeleteModal(event) {
+  $deleteModal.classList.add('hidden');
+}
+
+function deletePokemon(event) {
+  data.editing.removeMember(data.currentPokemon.name);
+  $deleteModal.classList.add('hidden');
+  resetTeam();
 }
 
 function changeView(event) {
@@ -226,6 +258,15 @@ function handleXHR(event) {
 
 function loadCurrentPokemon(event) {
   $pokemonDisplay.appendChild(createDiv(event.target.response));
+}
+
+function resetTeam() {
+  data.editing = null;
+  data.currentPokemon = null;
+  data.view = 'team';
+  switchView(data.view);
+  clearTeam();
+  loadTeam(data.team);
 }
 
 function loadTeam(array) {
@@ -453,6 +494,8 @@ function createDetailDiv(obj) {
     var $nature = document.createElement('p');
     var $natureName = document.createElement('p');
     var $rightCard = document.createElement('div');
+    var $deleteIconDiv = document.createElement('div');
+    var $deleteIcon = document.createElement('i');
     for (var moveIndex = 0; moveIndex < obj.members[pokemonIndex].move.length; moveIndex++) {
       var $moveDiv = document.createElement('div');
       var $move = document.createElement('p');
@@ -469,6 +512,8 @@ function createDetailDiv(obj) {
       $rightCard.append($moveDiv);
     }
 
+    $deleteIcon.className = 'fas fa-trash-can delete-icon';
+    $deleteIconDiv.className = 'text-right padding-5';
     $wholeCard.className = 'row sml-width-90 center-width margin-top-30';
     $leftCard.className = 'col-half left-card';
     $iconDiv.className = 'text-center';
@@ -483,7 +528,9 @@ function createDetailDiv(obj) {
     $natureDiv.className = 'text-center flex';
     $nature.className = 'font-10 detail-heading';
     $natureName.className = 'font-10 margin-left-10';
-    $rightCard.className = 'col-half right-card';
+    $rightCard.className = 'col-half right-card relative';
+
+    $deleteIcon.addEventListener('click', openDeleteModal);
 
     $ability.textContent = 'Ability:';
     $abilityName.textContent = obj.members[pokemonIndex].ability;
@@ -494,7 +541,11 @@ function createDetailDiv(obj) {
 
     $typeIcon1.setAttribute('src', obj.members[pokemonIndex].type[0]);
     $typeIcon2.setAttribute('src', obj.members[pokemonIndex].type[1]);
+    $deleteIcon.setAttribute('data-pokemon', obj.members[pokemonIndex].name);
+    $deleteIcon.setAttribute('data-team', obj.name);
 
+    $deleteIconDiv.append($deleteIcon);
+    $rightCard.appendChild($deleteIconDiv);
     $iconDiv.append($typeIcon1, $typeIcon2);
     $abilityDiv.append($ability, $abilityName);
     $itemDiv.append($item, $itemName);
@@ -528,4 +579,12 @@ Team.prototype.isFull = function () {
 
 Team.prototype.addMember = function (member) {
   this.members.push(member);
+};
+
+Team.prototype.removeMember = function (memberName) {
+  for (var i = 0; i < this.members.length; i++) {
+    if (this.members[i].name === memberName) {
+      this.members.splice(i, 1);
+    }
+  }
 };

@@ -89,7 +89,7 @@
             <div class="margin-top-10 text-center">
               <label class=""><i class="fas fa-circle-plus"></i>
                 <select id="customize-ability" class="blend" name="ability">
-                  <option>Add ability</option>
+                  <option value="">Add ability</option>
                 </select>
               </label>
             </div>
@@ -101,7 +101,7 @@
             <div class="margin-top-10 margin-bottom-10 text-center">
               <label class=""><i class="fas fa-circle-arrow-down"></i>
                 <select id="customize-nature" class="blend" name="nature">
-                  <option>Choose nature</option>
+                  <option value="">Choose nature</option>
                 </select>
               </label>
             </div>
@@ -175,6 +175,22 @@
         <div class="col-full text-center color-gray" data-view="search">
           <i class="fas fa-circle-plus"></i>
           <p>Add Pokemon</p>
+        </div>
+      </div>
+    </div>
+    <div class="relative hidden" id="delete-modal">
+      <div class="row">
+        <div class="col-full">
+          <div class="delete-modal flex center-width flex-column">
+            <div class="text-center width-full">
+              <p id="delete-question"></p>
+              <div class="delete-choice margin-top-30">
+                <button id="delete-modal-no" class="no-button">NO</button>
+                <button id="delete-modal-yes" class="yes-button">YES</button>
+              </div>
+            </div>
+          </div>
+          <div class="overlay"></div>
         </div>
       </div>
     </div>
