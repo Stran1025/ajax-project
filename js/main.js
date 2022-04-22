@@ -342,6 +342,7 @@ function loadCurrentType(array) {
   } else {
     $typeDisplay[1].classList.remove('hidden');
   }
+  data.currentType = [];
 }
 
 function switchView(view) {
