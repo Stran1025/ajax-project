@@ -25,6 +25,8 @@ var $teamDetailDisplay = document.querySelector('#team-detail-display');
 var $teamDetailAddPokemon = document.querySelector('#detail-add-pokemon');
 var $deleteQuestion = document.querySelector('#delete-question');
 var $deleteModal = document.querySelector('#delete-modal');
+var $deleteModalNo = document.querySelector('#delete-modal-no');
+var $deleteModalYes = document.querySelector('#delete-modal-yes');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -38,6 +40,8 @@ $teamListDisplay.addEventListener('click', handleTeamclicked);
 $navBar.addEventListener('click', changeView);
 $teamDisplay.addEventListener('click', handleTeamDisplayClick);
 $teamDetailAddPokemon.addEventListener('click', changeView);
+$deleteModalNo.addEventListener('click', closeDeleteModal);
+$deleteModalYes.addEventListener('click', deletePokemon);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
@@ -64,10 +68,32 @@ function handleTeamDisplayClick(event) {
   }
 }
 
-function removePokemon(event) {
+function openDeleteModal(event) {
   $deleteModal.classList.remove('hidden');
   $deleteQuestion.textContent = 'Do you want to release ' + event.target.getAttribute('data-pokemon') + '?';
+  for (var i = 0; i < data.team.length; i++) {
+    if (data.team[i].name === event.target.getAttribute('data-team')) {
+      data.editing = data.team[i];
+      for (var j = 0; j < data.team[i].members.length; j++) {
+        if (data.team[i].members[j].name === event.target.getAttribute('data-pokemon')) {
+          data.currentPokemon = data.team[i].members[j];
+          break;
+        }
+      }
+    }
+  }
 }
+
+function closeDeleteModal(event) {
+  $deleteModal.classList.add('hidden');
+}
+
+function deletePokemon(event) {
+  data.editing.removeMember(data.currentPokemon.name);
+  $deleteModal.classList.add('hidden');
+  resetTeam();
+}
+
 function changeView(event) {
   if (!event.target.parentElement.hasAttribute('data-view')) {
     return;
@@ -232,6 +258,15 @@ function handleXHR(event) {
 
 function loadCurrentPokemon(event) {
   $pokemonDisplay.appendChild(createDiv(event.target.response));
+}
+
+function resetTeam() {
+  data.editing = null;
+  data.currentPokemon = null;
+  data.view = 'team';
+  switchView(data.view);
+  clearTeam();
+  loadTeam(data.team);
 }
 
 function loadTeam(array) {
@@ -495,7 +530,7 @@ function createDetailDiv(obj) {
     $natureName.className = 'font-10 margin-left-10';
     $rightCard.className = 'col-half right-card relative';
 
-    $deleteIcon.addEventListener('click', removePokemon);
+    $deleteIcon.addEventListener('click', openDeleteModal);
 
     $ability.textContent = 'Ability:';
     $abilityName.textContent = obj.members[pokemonIndex].ability;
@@ -544,4 +579,12 @@ Team.prototype.isFull = function () {
 
 Team.prototype.addMember = function (member) {
   this.members.push(member);
+};
+
+Team.prototype.removeMember = function (memberName) {
+  for (var i = 0; i < this.members.length; i++) {
+    if (this.members[i].name === memberName) {
+      this.members.splice(i, 1);
+    }
+  }
 };
