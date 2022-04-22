@@ -11,7 +11,7 @@
 }
 
 .center-height {
-  align-items: center;
+  align-self: center;
 }
 
 .white-text {
@@ -287,4 +287,8 @@ div.left-card > div.pokemon-body {
   border: none;
   border-radius: 2px;
   padding: 10px 20px;
+}
+
+a:hover {
+  cursor: pointer;
 }

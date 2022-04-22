@@ -272,7 +272,7 @@ function resetTeam() {
 function loadTeam(array) {
   // <div class="col-full">
   //   <div class="team-header text-center">
-  //     <h3 class="white-text">Team Name</h3>
+  //     <a class="white-text">Team Name</a>
   //   </div>
   //   <div class="team-body">
   //     <div class="">
@@ -290,7 +290,7 @@ function loadTeam(array) {
     var $col = document.createElement('div');
     var $teamHead = document.createElement('div');
     var $teamBody = document.createElement('div');
-    var $teamName = document.createElement('h3');
+    var $teamName = document.createElement('a');
     for (var j = 0; j < array[i].members.length; j++) {
       var $teamMember = createDiv(array[i].members[j]);
       $teamBody.appendChild($teamMember);
@@ -298,7 +298,7 @@ function loadTeam(array) {
 
     $col.className = 'col-full';
     $teamHead.className = 'team-header text-center';
-    $teamName.className = 'white-text';
+    $teamName.className = 'white-text center-width';
     $teamBody.className = 'team-body flex flex-wrap flex-center';
     $teamName.textContent = array[i].name;
     $teamHead.setAttribute('data-team', array[i].name);
