@@ -288,22 +288,12 @@ a:active {
   }
 
   .modal {
-    position: absolute;
-    background-color: white;
-    border: none;
     bottom: 150px;
     left: 43%;
-    padding: 30px 50px;
-    z-index: 2;
   }
 
   .delete-modal {
-    position: absolute;
-    background-color: white;
-    border: none;
     bottom: 150vh;
     left: 40%;
-    padding: 30px 50px;
-    z-index: 2;
   }
 }
