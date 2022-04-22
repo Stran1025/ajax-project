@@ -50,121 +50,16 @@
   font-size: 25px;
 }
 
-.input-area {
-  width: 150px;
-  height: 100%;
-  border-radius: 0 28px 28px 0;
-  border: none;
-}
-
 .search-label {
   background-color: rgb(240, 219, 248);
-}
-
-.search-bar {
-  background-color: #836fce;
-  width: 100%;
-  margin-top: 20px;
-}
-
-.search-filters {
-  background-color: rgb(146, 128, 200);
-  padding: 20px;
 }
 
 .nav-bar {
   background-color: rgb(0, 100, 148);
 }
 
-.search-input {
-  width: 250px;
-  height: 30px;
-  border-radius: 30px;
-  margin-bottom: 20px;
-}
-
-.search-button {
-  border: none;
-  width: 70px;
-  height: 30px;
-  border-radius: 30px;
-}
-
 .color-pink {
   color: #9c88af;
-}
-
-.color-gray {
-  color: #a6a6a6;
-}
-
-.width-90 {
-  width: 90%;
-}
-
-.width-full {
-  width: 100%;
-}
-
-.pokemon-head {
-  background-color: #bba2db;
-  width: 96px;
-  height: 28px;
-}
-
-.pokemon-body {
-  border: 1px solid black;
-  width: 96px;
-  height: 96px;
-}
-
-.pokemon-head-clear {
-  width: 96px;
-  height: 28px;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.flex-center {
-  justify-content: space-between;
-}
-
-.justify-content-center {
-  justify-content: center;
-}
-
-.pokemon-display {
-  width: 100%;
-  margin: auto;
-}
-
-.display-top-space {
-  margin-top: 20px;
-}
-
-.icon {
-  width: 25px;
-  height: 25px;
-}
-
-.left-card {
-  border: 1px solid black;
-  border-radius: 8px 0 0 8px;
-  background: #cee5ed;
-}
-
-.right-card {
-  border: 1px solid black;
-  border-radius: 0 8px 8px 0;
-}
-
-.blend {
-  appearance: none;
-  border: none;
-  background: inherit;
-  width: 70%;
 }
 
 .margin-top-10 {
@@ -183,45 +78,28 @@
   margin-left: 10px;
 }
 
-.button {
-  padding: 6px 12px;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  color: white;
+.color-gray {
+  color: #a6a6a6;
 }
 
-.overlay {
-  position: absolute;
-  bottom: 0;
-  background-color: rgb(0 0 0 / 60%);
-  height: 200vh;
+.width-90 {
+  width: 90%;
+}
+
+.width-full {
   width: 100%;
-  z-index: 1;
 }
 
-.relative {
-  position: relative;
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
-.modal {
-  position: absolute;
-  background-color: white;
-  border: none;
-  bottom: 150px;
-  left: 25%;
-  padding: 30px 50px;
-  z-index: 2;
+.flex-center {
+  justify-content: space-between;
 }
 
-.delete-modal {
-  position: absolute;
-  background-color: white;
-  border: none;
-  bottom: 150vh;
-  left: 15%;
-  padding: 30px 50px;
-  z-index: 2;
+.justify-content-center {
+  justify-content: center;
 }
 
 .team-detail {
@@ -264,13 +142,128 @@ div.left-card > div.pokemon-body {
   padding: 5px;
 }
 
-.delete-choice {
-  display: flex;
-  justify-content: space-between;
-}
-
 .single-space {
   line-height: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+a:active {
+  color: yellow;
+}
+
+.input-area {
+  width: 150px;
+  height: 100%;
+  border-radius: 0 28px 28px 0;
+  border: none;
+}
+
+.search-bar {
+  background-color: #836fce;
+  width: 100%;
+}
+
+.search-filters {
+  background-color: rgb(146, 128, 200);
+  padding: 20px;
+}
+
+.search-input {
+  width: 250px;
+  height: 30px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+
+.search-button {
+  border: none;
+  width: 70px;
+  height: 30px;
+  border-radius: 30px;
+}
+
+.pokemon-head {
+  background-color: #bba2db;
+  width: 96px;
+  height: 28px;
+}
+
+.pokemon-body {
+  border: 1px solid black;
+  width: 96px;
+  height: 96px;
+}
+
+.pokemon-head-clear {
+  width: 96px;
+  height: 28px;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+}
+
+.left-card {
+  border: 1px solid black;
+  border-radius: 8px 0 0 8px;
+  background: #cee5ed;
+}
+
+.right-card {
+  border: 1px solid black;
+  border-radius: 0 8px 8px 0;
+}
+
+.blend {
+  appearance: none;
+  border: none;
+  background: inherit;
+  width: 70%;
+}
+
+.button {
+  padding: 6px 12px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background-color: rgb(0 0 0 / 60%);
+  height: 200vh;
+  width: 100%;
+  z-index: 1;
+}
+
+.modal {
+  position: absolute;
+  background-color: white;
+  border: none;
+  bottom: 150px;
+  left: 25%;
+  padding: 30px 50px;
+  z-index: 2;
+}
+
+.delete-modal {
+  position: absolute;
+  background-color: white;
+  border: none;
+  bottom: 150vh;
+  left: 15%;
+  padding: 30px 50px;
+  z-index: 2;
 }
 
 .no-button {
@@ -287,10 +280,6 @@ div.left-card > div.pokemon-body {
   border: none;
   border-radius: 2px;
   padding: 10px 20px;
-}
-
-a:hover {
-  cursor: pointer;
 }
 
 @media only screen and (min-width: 992px) {

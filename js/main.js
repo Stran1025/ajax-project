@@ -393,7 +393,7 @@ function createDiv(obj) {
   var $image = document.createElement('img');
   var $h3 = document.createElement('h3');
 
-  $col.className = 'col-third display-top-space link';
+  $col.className = 'col-third margin-top-30 link';
   $head.className = 'pokemon-head center-width flex';
   $body.className = 'pokemon-body center-width';
   $icon.className = 'width-fourth';
