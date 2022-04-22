@@ -297,8 +297,8 @@ function loadTeam(array) {
     }
 
     $col.className = 'col-full';
-    $teamHead.className = 'team-header text-center';
-    $teamName.className = 'white-text center-width';
+    $teamHead.className = 'team-header text-center padding-5';
+    $teamName.className = 'white-text center-width single-space';
     $teamBody.className = 'team-body flex flex-wrap flex-center';
     $teamName.textContent = array[i].name;
     $teamHead.setAttribute('data-team', array[i].name);
@@ -468,8 +468,8 @@ function createDetailDiv(obj) {
   var $cardHolder = document.createElement('div');
 
   $col.className = 'col-full';
-  $teamHead.className = 'team-header text-center';
-  $teamName.className = 'white-text';
+  $teamHead.className = 'team-header text-center margin-top-30 padding-5';
+  $teamName.className = 'white-text single-space';
   $cardHolder.className = 'flex flex-wrap';
 
   $teamName.textContent = obj.name;
