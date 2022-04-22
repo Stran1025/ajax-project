@@ -453,6 +453,8 @@ function createDetailDiv(obj) {
     var $nature = document.createElement('p');
     var $natureName = document.createElement('p');
     var $rightCard = document.createElement('div');
+    var $deleteIconDiv = document.createElement('div');
+    var $deleteIcon = document.createElement('i');
     for (var moveIndex = 0; moveIndex < obj.members[pokemonIndex].move.length; moveIndex++) {
       var $moveDiv = document.createElement('div');
       var $move = document.createElement('p');
@@ -469,6 +471,8 @@ function createDetailDiv(obj) {
       $rightCard.append($moveDiv);
     }
 
+    $deleteIcon.className = 'fas fa-trash-can delete-icon';
+    $deleteIconDiv.className = 'text-right padding-5';
     $wholeCard.className = 'row sml-width-90 center-width margin-top-30';
     $leftCard.className = 'col-half left-card';
     $iconDiv.className = 'text-center';
@@ -483,7 +487,7 @@ function createDetailDiv(obj) {
     $natureDiv.className = 'text-center flex';
     $nature.className = 'font-10 detail-heading';
     $natureName.className = 'font-10 margin-left-10';
-    $rightCard.className = 'col-half right-card';
+    $rightCard.className = 'col-half right-card relative';
 
     $ability.textContent = 'Ability:';
     $abilityName.textContent = obj.members[pokemonIndex].ability;
@@ -495,6 +499,8 @@ function createDetailDiv(obj) {
     $typeIcon1.setAttribute('src', obj.members[pokemonIndex].type[0]);
     $typeIcon2.setAttribute('src', obj.members[pokemonIndex].type[1]);
 
+    $deleteIconDiv.append($deleteIcon);
+    $rightCard.appendChild($deleteIconDiv);
     $iconDiv.append($typeIcon1, $typeIcon2);
     $abilityDiv.append($ability, $abilityName);
     $itemDiv.append($item, $itemName);
