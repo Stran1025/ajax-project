@@ -28,6 +28,10 @@
     width: 992px;
   }
 
+  .lg-col-fourth {
+    width: 20%;
+  }
+
   .col-third {
     width: 10.3%;
   }

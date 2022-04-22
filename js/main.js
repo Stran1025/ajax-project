@@ -272,7 +272,7 @@ function resetTeam() {
 function loadTeam(array) {
   // <div class="col-full">
   //   <div class="team-header text-center">
-  //     <h3 class="white-text">Team Name</h3>
+  //     <a class="white-text">Team Name</a>
   //   </div>
   //   <div class="team-body">
   //     <div class="">
@@ -290,15 +290,15 @@ function loadTeam(array) {
     var $col = document.createElement('div');
     var $teamHead = document.createElement('div');
     var $teamBody = document.createElement('div');
-    var $teamName = document.createElement('h3');
+    var $teamName = document.createElement('a');
     for (var j = 0; j < array[i].members.length; j++) {
       var $teamMember = createDiv(array[i].members[j]);
       $teamBody.appendChild($teamMember);
     }
 
     $col.className = 'col-full';
-    $teamHead.className = 'team-header text-center';
-    $teamName.className = 'white-text';
+    $teamHead.className = 'team-header text-center padding-5';
+    $teamName.className = 'white-text center-width single-space';
     $teamBody.className = 'team-body flex flex-wrap flex-center';
     $teamName.textContent = array[i].name;
     $teamHead.setAttribute('data-team', array[i].name);
@@ -342,6 +342,7 @@ function loadCurrentType(array) {
   } else {
     $typeDisplay[1].classList.remove('hidden');
   }
+  data.currentType = [];
 }
 
 function switchView(view) {
@@ -393,7 +394,7 @@ function createDiv(obj) {
   var $image = document.createElement('img');
   var $h3 = document.createElement('h3');
 
-  $col.className = 'col-third display-top-space link';
+  $col.className = 'col-third margin-top-30 link';
   $head.className = 'pokemon-head center-width flex';
   $body.className = 'pokemon-body center-width';
   $icon.className = 'width-fourth';
@@ -468,8 +469,8 @@ function createDetailDiv(obj) {
   var $cardHolder = document.createElement('div');
 
   $col.className = 'col-full';
-  $teamHead.className = 'team-header text-center';
-  $teamName.className = 'white-text';
+  $teamHead.className = 'team-header text-center margin-top-30 padding-5';
+  $teamName.className = 'white-text single-space';
   $cardHolder.className = 'flex flex-wrap';
 
   $teamName.textContent = obj.name;
