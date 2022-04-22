@@ -110,7 +110,13 @@
   margin: 0 10px;
 }
 
-.link:hover {
+a:hover,
+.link:hover,
+button:hover,
+label:hover,
+input:hover,
+select:hover,
+i.fa-trash-can:hover {
   cursor: pointer;
 }
 
@@ -148,10 +154,6 @@ div.left-card > div.pokemon-body {
 
 .relative {
   position: relative;
-}
-
-a:hover {
-  cursor: pointer;
 }
 
 a:active {
