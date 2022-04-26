@@ -27,6 +27,7 @@ var $deleteQuestion = document.querySelector('#delete-question');
 var $deleteModal = document.querySelector('#delete-modal');
 var $deleteModalNo = document.querySelector('#delete-modal-no');
 var $deleteModalYes = document.querySelector('#delete-modal-yes');
+var $loadingSpinner = document.querySelector('#loading-spinner');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -48,6 +49,7 @@ xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
 xhrGen1.responseType = 'json';
 xhrGen1.addEventListener('load', handleXHR);
 xhrGen1.send();
+$loadingSpinner.classList.remove('hidden');
 
 function handleTeamDisplayClick(event) {
   if (!event.target.parentElement.hasAttribute('data-team')) {
@@ -240,6 +242,7 @@ function dropDownSearch(event) {
 }
 
 function handleSearch(event) {
+  $loadingSpinner.classList.remove('hidden');
   event.preventDefault();
   dropDownSearch();
   while ($pokemonDisplay.firstChild) {
@@ -273,6 +276,7 @@ function handleXHR(event) {
 }
 
 function loadCurrentPokemon(event) {
+  $loadingSpinner.classList.add('hidden');
   $pokemonDisplay.appendChild(createDiv(event.target.response));
 }
 
