@@ -351,7 +351,7 @@ function getTeamList(array) {
 
 function loadCurrentType(array) {
   for (var i = 0; i < array.length; i++) {
-    $typeDisplay[i].setAttribute('src', '/images/type/' + array[i].type.name + '.png');
+    $typeDisplay[i].setAttribute('src', 'images/type/' + array[i].type.name + '.png');
   }
   if (array.length < $typeDisplay.length) {
     $typeDisplay[1].classList.add('hidden');
