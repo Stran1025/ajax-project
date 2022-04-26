@@ -131,6 +131,21 @@ function clearTeam() {
   }
 }
 
+function resetCustomize() {
+  while ($customizeAbility.children.length > 1) {
+    $customizeAbility.removeChild($customizeAbility.lastChild);
+  }
+  while ($customizeNature.children.length > 1) {
+    $customizeNature.removeChild($customizeNature.lastChild);
+  }
+  while ($customizeMove1.children.length > 1) {
+    $customizeMove1.removeChild($customizeMove1.lastChild);
+    $customizeMove2.removeChild($customizeMove2.lastChild);
+    $customizeMove3.removeChild($customizeMove3.lastChild);
+    $customizeMove4.removeChild($customizeMove4.lastChild);
+  }
+}
+
 function makeTeam(event) {
   if (event.target.value === '') {
     return;
@@ -173,6 +188,7 @@ function handleDisplayClick(event) {
   xhrNature.addEventListener('load', loadNaturelist);
   xhrNature.send();
   data.view = 'customize';
+  resetCustomize();
   switchView(data.view);
 }
 
@@ -507,7 +523,11 @@ function createDetailDiv(obj) {
       $moveName.className = 'font-10 margin-left-10';
 
       $move.textContent = 'Move ' + (moveIndex + 1) + ':';
-      $moveName.textContent = obj.members[pokemonIndex].move[moveIndex];
+      if (obj.members[pokemonIndex].move[moveIndex] === '') {
+        $moveName.textContent = '';
+      } else {
+        $moveName.textContent = obj.members[pokemonIndex].move[moveIndex][0].toUpperCase() + obj.members[pokemonIndex].move[moveIndex].slice(1);
+      }
 
       $moveDiv.append($move, $moveName);
       $rightCard.append($moveDiv);
@@ -534,7 +554,11 @@ function createDetailDiv(obj) {
     $deleteIcon.addEventListener('click', openDeleteModal);
 
     $ability.textContent = 'Ability:';
-    $abilityName.textContent = obj.members[pokemonIndex].ability;
+    if (obj.members[pokemonIndex].ability === '') {
+      $abilityName.textContent = obj.members[pokemonIndex].ability;
+    } else {
+      $abilityName.textContent = obj.members[pokemonIndex].ability[0].toUpperCase() + obj.members[pokemonIndex].ability.slice(1);
+    }
     $item.textContent = 'Item:';
     $itemName.textContent = obj.members[pokemonIndex].item;
     $nature.textContent = 'Nature:';
