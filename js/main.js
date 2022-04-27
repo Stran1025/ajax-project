@@ -27,6 +27,7 @@ var $deleteQuestion = document.querySelector('#delete-question');
 var $deleteModal = document.querySelector('#delete-modal');
 var $deleteModalNo = document.querySelector('#delete-modal-no');
 var $deleteModalYes = document.querySelector('#delete-modal-yes');
+var $loadingSpinner = document.querySelector('#loading-spinner');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -48,6 +49,7 @@ xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
 xhrGen1.responseType = 'json';
 xhrGen1.addEventListener('load', handleXHR);
 xhrGen1.send();
+$loadingSpinner.classList.remove('hidden');
 
 function handleTeamDisplayClick(event) {
   if (!event.target.parentElement.hasAttribute('data-team')) {
@@ -131,6 +133,21 @@ function clearTeam() {
   }
 }
 
+function resetCustomize() {
+  while ($customizeAbility.children.length > 1) {
+    $customizeAbility.removeChild($customizeAbility.lastChild);
+  }
+  while ($customizeNature.children.length > 1) {
+    $customizeNature.removeChild($customizeNature.lastChild);
+  }
+  while ($customizeMove1.children.length > 1) {
+    $customizeMove1.removeChild($customizeMove1.lastChild);
+    $customizeMove2.removeChild($customizeMove2.lastChild);
+    $customizeMove3.removeChild($customizeMove3.lastChild);
+    $customizeMove4.removeChild($customizeMove4.lastChild);
+  }
+}
+
 function makeTeam(event) {
   if (event.target.value === '') {
     return;
@@ -173,6 +190,7 @@ function handleDisplayClick(event) {
   xhrNature.addEventListener('load', loadNaturelist);
   xhrNature.send();
   data.view = 'customize';
+  resetCustomize();
   switchView(data.view);
 }
 
@@ -224,6 +242,7 @@ function dropDownSearch(event) {
 }
 
 function handleSearch(event) {
+  $loadingSpinner.classList.remove('hidden');
   event.preventDefault();
   dropDownSearch();
   while ($pokemonDisplay.firstChild) {
@@ -257,6 +276,7 @@ function handleXHR(event) {
 }
 
 function loadCurrentPokemon(event) {
+  $loadingSpinner.classList.add('hidden');
   $pokemonDisplay.appendChild(createDiv(event.target.response));
 }
 
@@ -335,7 +355,7 @@ function getTeamList(array) {
 
 function loadCurrentType(array) {
   for (var i = 0; i < array.length; i++) {
-    $typeDisplay[i].setAttribute('src', '/images/type/' + array[i].type.name + '.png');
+    $typeDisplay[i].setAttribute('src', 'images/type/' + array[i].type.name + '.png');
   }
   if (array.length < $typeDisplay.length) {
     $typeDisplay[1].classList.add('hidden');
@@ -507,7 +527,11 @@ function createDetailDiv(obj) {
       $moveName.className = 'font-10 margin-left-10';
 
       $move.textContent = 'Move ' + (moveIndex + 1) + ':';
-      $moveName.textContent = obj.members[pokemonIndex].move[moveIndex];
+      if (obj.members[pokemonIndex].move[moveIndex] === '') {
+        $moveName.textContent = '';
+      } else {
+        $moveName.textContent = obj.members[pokemonIndex].move[moveIndex][0].toUpperCase() + obj.members[pokemonIndex].move[moveIndex].slice(1);
+      }
 
       $moveDiv.append($move, $moveName);
       $rightCard.append($moveDiv);
@@ -534,7 +558,11 @@ function createDetailDiv(obj) {
     $deleteIcon.addEventListener('click', openDeleteModal);
 
     $ability.textContent = 'Ability:';
-    $abilityName.textContent = obj.members[pokemonIndex].ability;
+    if (obj.members[pokemonIndex].ability === '') {
+      $abilityName.textContent = obj.members[pokemonIndex].ability;
+    } else {
+      $abilityName.textContent = obj.members[pokemonIndex].ability[0].toUpperCase() + obj.members[pokemonIndex].ability.slice(1);
+    }
     $item.textContent = 'Item:';
     $itemName.textContent = obj.members[pokemonIndex].item;
     $nature.textContent = 'Nature:';

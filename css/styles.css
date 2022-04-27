@@ -110,7 +110,13 @@
   margin: 0 10px;
 }
 
-.link:hover {
+a:hover,
+.link:hover,
+button:hover,
+label:hover,
+input:hover,
+select:hover,
+.delete-icon:hover {
   cursor: pointer;
 }
 
@@ -148,10 +154,6 @@ div.left-card > div.pokemon-body {
 
 .relative {
   position: relative;
-}
-
-a:hover {
-  cursor: pointer;
 }
 
 a:active {
@@ -282,18 +284,62 @@ a:active {
   padding: 10px 20px;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
+  .modal {
+    left: 40%;
+  }
+
+  .delete-modal {
+    left: 30%;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
   .sml-width-90 {
     width: 30%;
   }
 
   .modal {
-    bottom: 150px;
     left: 43%;
   }
 
   .delete-modal {
-    bottom: 150vh;
     left: 40%;
   }
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-dual-ring::after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #dfc;
+  border-color: #dfc transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 100px;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }

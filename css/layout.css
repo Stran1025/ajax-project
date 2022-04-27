@@ -23,20 +23,30 @@
   width: 25%;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
+  .container {
+    width: 700px;
+  }
+
+  .lg-col-fourth {
+    width: calc(375px / 2);
+  }
+
+  .col-third {
+    width: calc(100% / 6);
+  }
+}
+
+@media only screen and (min-width: 1280px) {
   .container {
     width: 992px;
   }
 
   .lg-col-fourth {
-    width: 20%;
+    width: calc(375px / 2);
   }
 
   .col-third {
     width: 10.3%;
   }
-}
-
-.delete-icon {
-  align-self: flex-end;
 }

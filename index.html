@@ -24,6 +24,13 @@
     </div>
   </header>
   <main>
+    <div id="loading-spinner" class="container hidden view" data-view="loading">
+      <div class="row">
+        <div class="col-full text-center loading-spinner">
+          <div class="lds-dual-ring"></div>
+        </div>
+      </div>
+    </div>
     <div class="container view" data-view="search">
       <div class="row">
         <div class="col-full">
@@ -57,6 +64,22 @@
                     <option value="">Select a type</option>
                     <option value="fire">Fire</option>
                     <option value="flying">Flying</option>
+                    <option value="bug">Bug</option>
+                    <option value="dark">Dark</option>
+                    <option value="dragon">Dragon</option>
+                    <option value="electric">Electric</option>
+                    <option value="fairy">Fairy</option>
+                    <option value="fighting">Fighting</option>
+                    <option value="ghost">Ghost</option>
+                    <option value="grass">Grass</option>
+                    <option value="ground">Ground</option>
+                    <option value="ice">Ice</option>
+                    <option value="normal">Normal</option>
+                    <option value="poison">Poison</option>
+                    <option value="psychic">Psychic</option>
+                    <option value="rock">Rock</option>
+                    <option value="water">Water</option>
+
                   </select>
                 </label>
               </div>
@@ -164,7 +187,6 @@
         </div>
       </div>
       <div id="team-display" class="row flex-wrap">
-
       </div>
     </div>
     <div class="container view team-detail" data-view="team-detail">
@@ -173,8 +195,8 @@
       </div>
       <div id="detail-add-pokemon" class="row margin-top-30 hidden" data-view="search">
         <div class="col-full text-center color-gray" data-view="search">
-          <i class="fas fa-circle-plus"></i>
-          <p>Add Pokemon</p>
+          <i class="fas fa-circle-plus link"></i>
+          <p class="link">Add Pokemon</p>
         </div>
       </div>
     </div>
