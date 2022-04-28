@@ -293,6 +293,7 @@ function loadTeam(array) {
   // <div class="col-full">
   //   <div class="team-header text-center">
   //     <a class="white-text">Team Name</a>
+  //     <i class="fas fa-trash-can delete-team-icon"></i>
   //   </div>
   //   <div class="team-body">
   //     <div class="">
@@ -311,20 +312,22 @@ function loadTeam(array) {
     var $teamHead = document.createElement('div');
     var $teamBody = document.createElement('div');
     var $teamName = document.createElement('a');
+    var $deleteTeamIcon = document.createElement('i');
     for (var j = 0; j < array[i].members.length; j++) {
       var $teamMember = createDiv(array[i].members[j]);
       $teamBody.appendChild($teamMember);
     }
 
     $col.className = 'col-full';
-    $teamHead.className = 'team-header text-center padding-5';
+    $teamHead.className = 'team-header text-center padding-5 flex';
     $teamName.className = 'white-text center-width single-space';
     $teamBody.className = 'team-body flex flex-wrap flex-center';
     $teamName.textContent = array[i].name;
     $teamHead.setAttribute('data-team', array[i].name);
+    $deleteTeamIcon.className = 'fas fa-trash-can delete-team-icon';
 
     $col.append($teamHead, $teamBody);
-    $teamHead.appendChild($teamName);
+    $teamHead.append($teamName, $deleteTeamIcon);
     $teamDisplay.appendChild($col);
   }
 }
