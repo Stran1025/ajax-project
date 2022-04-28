@@ -116,6 +116,8 @@ function deleteTeam(event) {
   $deleteTeamModal.classList.add('hidden');
   clearTeam();
   loadTeam(data.team);
+  clearTeamList();
+  getTeamList(data.team);
 }
 
 function deletePokemon(event) {
@@ -183,6 +185,7 @@ function makeTeam(event) {
   var newTeam = new Team(event.target.value);
   event.target.value = '';
   data.team.push(newTeam);
+  clearTeamList();
   getTeamList(data.team);
 }
 
@@ -362,14 +365,17 @@ function loadTeam(array) {
   }
 }
 
+function clearTeamList() {
+  while ($teamListDisplay.children.length > 1) {
+    $teamListDisplay.removeChild($teamListDisplay.lastChild);
+  }
+}
+
 function getTeamList(array) {
   // <div class="text-center">
   //   <i class="fas fa-circle-plus center-width"></i>
   //   <input id="new-team-name" type="text" class="font-10 blend center-width" placeholder="Create New Team">
   // </div>
-  while ($teamListDisplay.childElementCount > 1) {
-    $teamListDisplay.removeChild($teamListDisplay.lastChild);
-  }
   for (var i = 0; i < array.length; i++) {
     var $teamDiv = document.createElement('div');
     var $plusIcon = document.createElement('i');
