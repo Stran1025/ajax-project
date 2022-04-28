@@ -329,6 +329,7 @@ function loadTeam(array) {
     $teamBody.className = 'team-body flex flex-wrap flex-center';
     $teamName.textContent = array[i].name;
     $teamHead.setAttribute('data-team', array[i].name);
+    $teamName.setAttribute('data-team', array[i].name);
     $deleteTeamIcon.className = 'fas fa-trash-can delete-team-icon';
     $deleteTeamIcon.setAttribute('data-delete-team', array[i].name);
 
