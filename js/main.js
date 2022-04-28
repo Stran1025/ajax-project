@@ -55,16 +55,21 @@ function handleTeamDisplayClick(event) {
   if (!event.target.parentElement.hasAttribute('data-team')) {
     return;
   }
-  for (var i = 0; i < data.team.length; i++) {
-    if (data.team[i].name === event.target.parentElement.getAttribute('data-team')) {
-      switchView('team-detail');
-      $teamDetailAddPokemon.classList.add('hidden');
-      while ($teamDetailDisplay.firstChild) {
-        $teamDetailDisplay.removeChild($teamDetailDisplay.firstChild);
-      }
-      $teamDetailDisplay.appendChild(createDetailDiv(data.team[i]));
-      if (data.team[i].members.length < 6) {
-        $teamDetailAddPokemon.classList.remove('hidden');
+  if (event.target.hasAttribute('data-delete-team')) {
+    return;
+  }
+  if (event.target.hasAttribute('data-team')) {
+    for (var i = 0; i < data.team.length; i++) {
+      if (data.team[i].name === event.target.parentElement.getAttribute('data-team')) {
+        switchView('team-detail');
+        $teamDetailAddPokemon.classList.add('hidden');
+        while ($teamDetailDisplay.firstChild) {
+          $teamDetailDisplay.removeChild($teamDetailDisplay.firstChild);
+        }
+        $teamDetailDisplay.appendChild(createDetailDiv(data.team[i]));
+        if (data.team[i].members.length < 6) {
+          $teamDetailAddPokemon.classList.remove('hidden');
+        }
       }
     }
   }
@@ -325,6 +330,7 @@ function loadTeam(array) {
     $teamName.textContent = array[i].name;
     $teamHead.setAttribute('data-team', array[i].name);
     $deleteTeamIcon.className = 'fas fa-trash-can delete-team-icon';
+    $deleteTeamIcon.setAttribute('data-delete-team', array[i].name);
 
     $col.append($teamHead, $teamBody);
     $teamHead.append($teamName, $deleteTeamIcon);
