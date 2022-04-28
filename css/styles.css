@@ -343,3 +343,13 @@ a:active {
   right: 0;
   left: 0;
 }
+
+.delete-team-modal {
+  position: absolute;
+  background-color: white;
+  border: none;
+  bottom: 0;
+  left: 15%;
+  padding: 30px 50px;
+  z-index: 2;
+}

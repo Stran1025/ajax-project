@@ -27,6 +27,9 @@ var $deleteQuestion = document.querySelector('#delete-question');
 var $deleteModal = document.querySelector('#delete-modal');
 var $deleteModalNo = document.querySelector('#delete-modal-no');
 var $deleteModalYes = document.querySelector('#delete-modal-yes');
+var $deleteTeamModal = document.querySelector('#team-delete-modal');
+var $deleteTeamNo = document.querySelector('#-delete-team-no');
+var $deleteTeamYes = document.querySelector('#-delete-team-yes');
 var $loadingSpinner = document.querySelector('#loading-spinner');
 
 $searchBar.addEventListener('click', dropDownSearch);
@@ -43,6 +46,8 @@ $teamDisplay.addEventListener('click', handleTeamDisplayClick);
 $teamDetailAddPokemon.addEventListener('click', changeView);
 $deleteModalNo.addEventListener('click', closeDeleteModal);
 $deleteModalYes.addEventListener('click', deletePokemon);
+$deleteTeamNo.addEventListener('click', closeDeleteModal);
+$deleteTeamYes.addEventListener('click', deletePokemon);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
@@ -56,7 +61,7 @@ function handleTeamDisplayClick(event) {
     return;
   }
   if (event.target.hasAttribute('data-delete-team')) {
-    return;
+    $deleteTeamModal.classList.remove('hidden');
   }
   if (event.target.hasAttribute('data-team')) {
     for (var i = 0; i < data.team.length; i++) {
