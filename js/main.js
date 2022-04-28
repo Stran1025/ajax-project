@@ -27,7 +27,11 @@ var $deleteQuestion = document.querySelector('#delete-question');
 var $deleteModal = document.querySelector('#delete-modal');
 var $deleteModalNo = document.querySelector('#delete-modal-no');
 var $deleteModalYes = document.querySelector('#delete-modal-yes');
+var $deleteTeamModal = document.querySelector('#team-delete-modal');
+var $deleteTeamNo = document.querySelector('#delete-team-no');
+var $deleteTeamYes = document.querySelector('#delete-team-yes');
 var $loadingSpinner = document.querySelector('#loading-spinner');
+var $deleteTeamQuestion = document.querySelector('#delete-team-question');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -43,6 +47,8 @@ $teamDisplay.addEventListener('click', handleTeamDisplayClick);
 $teamDetailAddPokemon.addEventListener('click', changeView);
 $deleteModalNo.addEventListener('click', closeDeleteModal);
 $deleteModalYes.addEventListener('click', deletePokemon);
+$deleteTeamNo.addEventListener('click', closeDeleteTeamModal);
+$deleteTeamYes.addEventListener('click', deleteTeam);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
@@ -55,16 +61,23 @@ function handleTeamDisplayClick(event) {
   if (!event.target.parentElement.hasAttribute('data-team')) {
     return;
   }
-  for (var i = 0; i < data.team.length; i++) {
-    if (data.team[i].name === event.target.parentElement.getAttribute('data-team')) {
-      switchView('team-detail');
-      $teamDetailAddPokemon.classList.add('hidden');
-      while ($teamDetailDisplay.firstChild) {
-        $teamDetailDisplay.removeChild($teamDetailDisplay.firstChild);
-      }
-      $teamDetailDisplay.appendChild(createDetailDiv(data.team[i]));
-      if (data.team[i].members.length < 6) {
-        $teamDetailAddPokemon.classList.remove('hidden');
+  if (event.target.hasAttribute('data-delete-team')) {
+    $deleteTeamModal.classList.remove('hidden');
+    data.editing = event.target.getAttribute('data-delete-team');
+    $deleteTeamQuestion.textContent = 'Would you like to delete ' + event.target.getAttribute('data-delete-team') + ' ?';
+  }
+  if (event.target.hasAttribute('data-team')) {
+    for (var i = 0; i < data.team.length; i++) {
+      if (data.team[i].name === event.target.parentElement.getAttribute('data-team')) {
+        switchView('team-detail');
+        $teamDetailAddPokemon.classList.add('hidden');
+        while ($teamDetailDisplay.firstChild) {
+          $teamDetailDisplay.removeChild($teamDetailDisplay.firstChild);
+        }
+        $teamDetailDisplay.appendChild(createDetailDiv(data.team[i]));
+        if (data.team[i].members.length < 6) {
+          $teamDetailAddPokemon.classList.remove('hidden');
+        }
       }
     }
   }
@@ -88,6 +101,23 @@ function openDeleteModal(event) {
 
 function closeDeleteModal(event) {
   $deleteModal.classList.add('hidden');
+}
+
+function closeDeleteTeamModal(event) {
+  $deleteTeamModal.classList.add('hidden');
+}
+
+function deleteTeam(event) {
+  for (var i = 0; i < data.team.length; i++) {
+    if (data.team[i].name === data.editing) {
+      data.team.splice(i, 1);
+    }
+  }
+  $deleteTeamModal.classList.add('hidden');
+  clearTeam();
+  loadTeam(data.team);
+  clearTeamList();
+  getTeamList(data.team);
 }
 
 function deletePokemon(event) {
@@ -155,6 +185,7 @@ function makeTeam(event) {
   var newTeam = new Team(event.target.value);
   event.target.value = '';
   data.team.push(newTeam);
+  clearTeamList();
   getTeamList(data.team);
 }
 
@@ -293,6 +324,7 @@ function loadTeam(array) {
   // <div class="col-full">
   //   <div class="team-header text-center">
   //     <a class="white-text">Team Name</a>
+  //     <i class="fas fa-trash-can delete-team-icon"></i>
   //   </div>
   //   <div class="team-body">
   //     <div class="">
@@ -311,21 +343,31 @@ function loadTeam(array) {
     var $teamHead = document.createElement('div');
     var $teamBody = document.createElement('div');
     var $teamName = document.createElement('a');
+    var $deleteTeamIcon = document.createElement('i');
     for (var j = 0; j < array[i].members.length; j++) {
       var $teamMember = createDiv(array[i].members[j]);
       $teamBody.appendChild($teamMember);
     }
 
     $col.className = 'col-full';
-    $teamHead.className = 'team-header text-center padding-5';
+    $teamHead.className = 'team-header text-center padding-5 flex';
     $teamName.className = 'white-text center-width single-space';
     $teamBody.className = 'team-body flex flex-wrap flex-center';
     $teamName.textContent = array[i].name;
     $teamHead.setAttribute('data-team', array[i].name);
+    $teamName.setAttribute('data-team', array[i].name);
+    $deleteTeamIcon.className = 'fas fa-trash-can delete-team-icon';
+    $deleteTeamIcon.setAttribute('data-delete-team', array[i].name);
 
     $col.append($teamHead, $teamBody);
-    $teamHead.appendChild($teamName);
+    $teamHead.append($teamName, $deleteTeamIcon);
     $teamDisplay.appendChild($col);
+  }
+}
+
+function clearTeamList() {
+  while ($teamListDisplay.children.length > 1) {
+    $teamListDisplay.removeChild($teamListDisplay.lastChild);
   }
 }
 
@@ -334,9 +376,6 @@ function getTeamList(array) {
   //   <i class="fas fa-circle-plus center-width"></i>
   //   <input id="new-team-name" type="text" class="font-10 blend center-width" placeholder="Create New Team">
   // </div>
-  while ($teamListDisplay.childElementCount > 1) {
-    $teamListDisplay.removeChild($teamListDisplay.lastChild);
-  }
   for (var i = 0; i < array.length; i++) {
     var $teamDiv = document.createElement('div');
     var $plusIcon = document.createElement('i');
