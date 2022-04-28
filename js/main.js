@@ -28,9 +28,10 @@ var $deleteModal = document.querySelector('#delete-modal');
 var $deleteModalNo = document.querySelector('#delete-modal-no');
 var $deleteModalYes = document.querySelector('#delete-modal-yes');
 var $deleteTeamModal = document.querySelector('#team-delete-modal');
-var $deleteTeamNo = document.querySelector('#-delete-team-no');
-var $deleteTeamYes = document.querySelector('#-delete-team-yes');
+var $deleteTeamNo = document.querySelector('#delete-team-no');
+var $deleteTeamYes = document.querySelector('#delete-team-yes');
 var $loadingSpinner = document.querySelector('#loading-spinner');
+var $deleteTeamQuestion = document.querySelector('#delete-team-question');
 
 $searchBar.addEventListener('click', dropDownSearch);
 $searchButton.addEventListener('click', handleSearch);
@@ -45,8 +46,8 @@ $navBar.addEventListener('click', changeView);
 $teamDisplay.addEventListener('click', handleTeamDisplayClick);
 $teamDetailAddPokemon.addEventListener('click', changeView);
 $deleteModalNo.addEventListener('click', closeDeleteModal);
-$deleteModalYes.addEventListener('click', deletePokemon);
-$deleteTeamNo.addEventListener('click', closeDeleteModal);
+$deleteModalYes.addEventListener('click', deleteTeam);
+$deleteTeamNo.addEventListener('click', closeDeleteTeamModal);
 $deleteTeamYes.addEventListener('click', deletePokemon);
 
 var xhrGen1 = new XMLHttpRequest();
@@ -62,6 +63,8 @@ function handleTeamDisplayClick(event) {
   }
   if (event.target.hasAttribute('data-delete-team')) {
     $deleteTeamModal.classList.remove('hidden');
+    data.editing = event.target.getAttribute('data-delete-team');
+    $deleteTeamQuestion.textContent = 'Would you like to delete ' + event.target.getAttribute('data-delete-team') + ' ?';
   }
   if (event.target.hasAttribute('data-team')) {
     for (var i = 0; i < data.team.length; i++) {
@@ -98,6 +101,14 @@ function openDeleteModal(event) {
 
 function closeDeleteModal(event) {
   $deleteModal.classList.add('hidden');
+}
+
+function closeDeleteTeamModal(event) {
+  $deleteTeamModal.classList.add('hidden');
+}
+
+function deleteTeam(event) {
+  $deleteTeamModal.classList.add('hidden');
 }
 
 function deletePokemon(event) {

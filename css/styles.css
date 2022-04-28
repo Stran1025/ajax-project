@@ -268,6 +268,16 @@ a:active {
   z-index: 2;
 }
 
+.delete-team-modal {
+  position: absolute;
+  background-color: white;
+  border: none;
+  bottom: 0;
+  left: 15%;
+  padding: 30px 50px;
+  z-index: 2;
+}
+
 .no-button {
   background-color: #dfdfdf;
   color: #9f9f9f;
@@ -342,14 +352,4 @@ a:active {
   bottom: 0;
   right: 0;
   left: 0;
-}
-
-.delete-team-modal {
-  position: absolute;
-  background-color: white;
-  border: none;
-  bottom: 0;
-  left: 15%;
-  padding: 30px 50px;
-  z-index: 2;
 }
