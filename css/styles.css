@@ -273,7 +273,7 @@ a:active {
   background-color: white;
   border: none;
   bottom: 0;
-  left: 15%;
+  left: 20%;
   padding: 30px 50px;
   z-index: 2;
 }
@@ -302,6 +302,10 @@ a:active {
   .delete-modal {
     left: 30%;
   }
+
+  .delete-team-modal {
+    left: 30%;
+  }
 }
 
 @media only screen and (min-width: 1280px) {
@@ -314,6 +318,10 @@ a:active {
   }
 
   .delete-modal {
+    left: 40%;
+  }
+
+  .delete-team-modal {
     left: 40%;
   }
 }
