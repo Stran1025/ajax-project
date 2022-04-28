@@ -46,9 +46,9 @@ $navBar.addEventListener('click', changeView);
 $teamDisplay.addEventListener('click', handleTeamDisplayClick);
 $teamDetailAddPokemon.addEventListener('click', changeView);
 $deleteModalNo.addEventListener('click', closeDeleteModal);
-$deleteModalYes.addEventListener('click', deleteTeam);
+$deleteModalYes.addEventListener('click', deletePokemon);
 $deleteTeamNo.addEventListener('click', closeDeleteTeamModal);
-$deleteTeamYes.addEventListener('click', deletePokemon);
+$deleteTeamYes.addEventListener('click', deleteTeam);
 
 var xhrGen1 = new XMLHttpRequest();
 xhrGen1.open('GET', 'https://pokeapi.co/api/v2/generation/1');
@@ -108,7 +108,14 @@ function closeDeleteTeamModal(event) {
 }
 
 function deleteTeam(event) {
+  for (var i = 0; i < data.team.length; i++) {
+    if (data.team[i].name === data.editing) {
+      data.team.splice(i, 1);
+    }
+  }
   $deleteTeamModal.classList.add('hidden');
+  clearTeam();
+  loadTeam(data.team);
 }
 
 function deletePokemon(event) {
