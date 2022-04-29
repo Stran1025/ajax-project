@@ -249,10 +249,10 @@ a:active {
 }
 
 .modal {
-  position: absolute;
+  position: fixed;
   background-color: white;
   border: none;
-  bottom: 150px;
+  top: 100px;
   left: 25%;
   padding: 30px 50px;
   z-index: 2;
@@ -269,10 +269,10 @@ a:active {
 }
 
 .delete-team-modal {
-  position: absolute;
+  position: fixed;
   background-color: white;
   border: none;
-  bottom: 0;
+  top: 100px;
   left: 20%;
   padding: 30px 50px;
   z-index: 2;
