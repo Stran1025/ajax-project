@@ -15,6 +15,52 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div id="modal" class="relative hidden">
+    <div class="row">
+      <div class="col-full">
+        <div class="overlay"></div>
+        <div id="team-list-display" class="modal flex center-width flex-column">
+          <div class="text-center width-full">
+            <i class="fas fa-circle-plus center-width"></i>
+            <input id="new-team-name" type="text" class="font-10 blend center-width center-height margin-left-10"
+              placeholder="Create New Team">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="relative hidden" id="delete-modal">
+    <div class="row">
+      <div class="col-full">
+        <div class="delete-modal flex center-width flex-column">
+          <div class="text-center width-full">
+            <p id="delete-question"></p>
+            <div class="flex flex-center margin-top-30">
+              <button id="delete-modal-no" class="no-button">NO</button>
+              <button id="delete-modal-yes" class="yes-button">YES</button>
+            </div>
+          </div>
+        </div>
+        <div class="overlay"></div>
+      </div>
+    </div>
+  </div>
+  <div class="relative hidden" id="team-delete-modal">
+    <div class="row">
+      <div class="col-full">
+        <div class="delete-team-modal flex center-width flex-column">
+          <div class="text-center width-full">
+            <p id="delete-team-question">testtest</p>
+            <div class="flex flex-center margin-top-30">
+              <button id="delete-team-no" class="no-button">NO</button>
+              <button id="delete-team-yes" class="yes-button">YES</button>
+            </div>
+          </div>
+        </div>
+        <div class="overlay"></div>
+      </div>
+    </div>
+  </div>
   <header>
     <div class="container nav-bar">
       <div class="row">
@@ -172,19 +218,6 @@
         </div>
       </form>
     </div>
-    <div id="modal" class="relative hidden">
-      <div class="row">
-        <div class="col-full">
-          <div class="overlay"></div>
-          <div id="team-list-display" class="modal flex center-width flex-column">
-            <div class="text-center width-full">
-              <i class="fas fa-circle-plus center-width"></i>
-              <input id="new-team-name" type="text" class="font-10 blend center-width center-height margin-left-10" placeholder="Create New Team">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="container view hidden" data-view="team">
       <div class="row">
         <div class="col-full">
@@ -202,38 +235,6 @@
         <div class="col-full text-center color-gray" data-view="search">
           <i class="fas fa-circle-plus link"></i>
           <p class="link">Add Pokemon</p>
-        </div>
-      </div>
-    </div>
-    <div class="relative hidden" id="delete-modal">
-      <div class="row">
-        <div class="col-full">
-          <div class="delete-modal flex center-width flex-column">
-            <div class="text-center width-full">
-              <p id="delete-question"></p>
-              <div class="flex flex-center margin-top-30">
-                <button id="delete-modal-no" class="no-button">NO</button>
-                <button id="delete-modal-yes" class="yes-button">YES</button>
-              </div>
-            </div>
-          </div>
-          <div class="overlay"></div>
-        </div>
-      </div>
-    </div>
-    <div class="relative hidden" id="team-delete-modal">
-      <div class="row">
-        <div class="col-full">
-          <div class="delete-team-modal flex center-width flex-column">
-            <div class="text-center width-full">
-              <p id="delete-team-question">testtest</p>
-              <div class="flex flex-center margin-top-30">
-                <button id="delete-team-no" class="no-button">NO</button>
-                <button id="delete-team-yes" class="yes-button">YES</button>
-              </div>
-            </div>
-          </div>
-          <div class="overlay"></div>
         </div>
       </div>
     </div>
