@@ -1,6 +1,6 @@
 /* exported data */
 
-var data = {
+const data = {
   editing: null,
   view: 'search',
   currentType: [],
