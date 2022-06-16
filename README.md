@@ -18,7 +18,7 @@ Check the application live here: (https://stran1025.github.io/poke-builder/)
 - Trainers can create a new team and add pokemon to it
 - Trainers can see their team.
 - Trainers can delete a team or a pokemon from a team
-### Not Implemented
+### Stretch Features
 - Trainers can add a tag to a pokemon.
 
 
